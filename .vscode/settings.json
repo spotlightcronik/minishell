@@ -1,0 +1,11 @@
+{
+	"files.associations": {
+		"libft.h": "c",
+		"get_next_line.c": "cpp",
+		"random": "c",
+		"unistd.h": "c",
+		"philosopher.h": "c",
+		"stdio.h": "c",
+		"pthread.h": "c"
+	}
+}

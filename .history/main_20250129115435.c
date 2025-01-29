@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/01/29 11:54:36 by auloth           ###   ########.fr       */
+/*   Updated: 2025/01/29 11:54:35 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(void)
 		input = readline("prompt > ");
 		if(!input)
 			perror("read line");
-		
+			
 		printf("%s\n", input);
 	}
 	return(0);

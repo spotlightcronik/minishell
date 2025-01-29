@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_command.h                                        :+:      :+:    :+:   */
+/*   pars.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/01/28 16:58:46 by auloth           ###   ########.fr       */
+/*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
+/*   Updated: 2025/01/28 13:24:56 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_COMMAND_H
-# define T_COMMAND_H
-
-typedef struct s_command
-{
-	char		*infile;
-	char		heredoc;
-	char		*name;
-	char		**args;
-	char		*output;
-	int			append;
-}				t_command;
-
+#ifndef PARS
+# define PARS
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <signal.h>
+# include <sys/stat.h>
+# include <dirent.h>
+# include <string.h>
+# include <errno.h>
+# include <ttyent.h>
+# include <sys/ioctl.h>
+# include <termios.h>
+# include <termcap.h>
 
 
 #endif

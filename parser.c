@@ -1,28 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_command.h                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/01/28 16:58:46 by auloth           ###   ########.fr       */
+/*   Created: 2025/01/28 16:52:09 by auloth            #+#    #+#             */
+/*   Updated: 2025/01/29 11:50:41 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_COMMAND_H
-# define T_COMMAND_H
-
-typedef struct s_command
-{
-	char		*infile;
-	char		heredoc;
-	char		*name;
-	char		**args;
-	char		*output;
-	int			append;
-}				t_command;
+#include "pars.h"
 
 
-
-#endif

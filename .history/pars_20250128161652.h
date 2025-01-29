@@ -6,14 +6,13 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/01/28 16:59:26 by auloth           ###   ########.fr       */
+/*   Updated: 2025/01/28 16:16:52 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARS
 # define PARS
 # include "inc/t_command.h"
-# include "structs.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdio.h>

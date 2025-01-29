@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_command.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/01/28 16:58:46 by auloth           ###   ########.fr       */
+/*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
+/*   Updated: 2025/01/28 15:58:35 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_COMMAND_H
-# define T_COMMAND_H
+#include "pars.h"
 
-typedef struct s_command
+int main(void)
 {
-	char		*infile;
-	char		heredoc;
-	char		*name;
-	char		**args;
-	char		*output;
-	int			append;
-}				t_command;
+	char *input;
+	t_command hell;
 
+	input = readline("prompt > ");
+	printf("%s\n", input);
 
+	return(0);
 
-#endif
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_command.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/01/28 16:58:46 by auloth           ###   ########.fr       */
+/*   Updated: 2025/01/28 15:51:04 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 
 typedef struct s_command
 {
-	char		*infile;
-	char		heredoc;
-	char		*name;
-	char		**args;
-	char		*output;
-	int			append;
-}				t_command;
-
-
+	char	*infile;
+	char	heredoc;
+	char	*name;
+	char	**args;
+	char	*output;
+	bool	append;
+}	t_command;
 
 #endif

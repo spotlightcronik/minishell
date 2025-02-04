@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstchr.c                                        :+:      :+:    :+:   */
+/*   free_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 11:22:32 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:06:16 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/02/03 11:33:01 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/02/04 12:50:09 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "execution.h"
 
-t_list	*ft_lstchr(t_list *lst, void *data_ref, int (*cmp)(void *, void *))
+void	free_cmd(void *ptr)
 {
-	t_list	*node;
+	int	index;
+	t_command *cmd;
 
-	if (!lst)
-		return (NULL);
-	node = lst;
-	while (node)
+	cmd = ptr;
+	if (cmd)
 	{
-		if (!cmp(node->content, data_ref))
-			return (node);
-		node = node->next;
+		if (cmd->infile)
+			free(cmd->infile);
+		if (cmd->name)
+			free(cmd->name);
+		if (cmd->args)
+		{
+			index = 0;
+			while (cmd->args[index])
+			{
+				free(cmd->infile);
+				index++;
+			}
+		}
+		if (cmd->outfile)
+			free(cmd->outfile);
+		free(cmd);
 	}
-	return (NULL);
 }

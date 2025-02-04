@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:52:09 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/04 13:58:34 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/04 14:11:55 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	quotes(t_info *data, char quotes)
 int	check_for_operator(t_info *data)
 {
 	if (data->str[data->count] == '|' && data->q.passed != 1)
-		return (create_token(data, "|", "pipe"));
+		return (data->count++, create_token(data, "|", "pipe"));
 	if (data->str[data->count] == '<' && data->str[data->count + 1] == '<'
 		&& data->q.passed != 1)
-		return (data->count += 1, create_token(data, "<<", "heredoc"));
+		return (data->count += 2, create_token(data, "<<", "heredoc"));
 	if (data->str[data->count] == '>' && data->str[data->count + 1] == '>'
 		&& data->q.passed != 1)
-		return (data->count += 1, create_token(data, ">>", "apend redirec"));
-	if (data->str[data->count] == '>' && data->q.passed != 1)
-		return (create_token(data, ">", "output redirection"));
-	if (data->str[data->count] == '<' && data->q.passed != 1)
-		return (create_token(data, "<", "input redirection"));
+		return (data->count += 2, create_token(data, ">>", "apend redirec"));
+	if (data->str[data->count] == '>')
+		return (data->count++, create_token(data, ">", "output redirection"));
+	if (data->str[data->count] == '<')
+		return (data->count++, create_token(data, "<", "input redirection"));
 	return (0);
 }
 

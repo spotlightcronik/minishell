@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:14:25 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/01/17 16:13:59 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:47:50 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stddef.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdarg.h>
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 //= STRUCTS =//
 
@@ -24,9 +24,9 @@
  * Estructure to keep data in a linked list.
  * @param content Pointer to the content stored in the node.
  * @param next Pointer to the next node in the list,
-     or NULL if it's the last node.
+		or NULL if it's the last node.
  * @param prev Pointer to the previous node in the list,
-     or NULL if it's the first node.
+		or NULL if it's the first node.
  */
 typedef struct s_list
 {
@@ -39,7 +39,7 @@ typedef enum e_bool
 {
 	false,
 	true,
-}	t_bool;
+}					t_bool;
 
 //= Character Functions =//
 
@@ -48,52 +48,52 @@ typedef enum e_bool
  * it is equivalent to (isupper(c) || islower(c)).
  * @param[in] c Character to be checked.
  */
-int		ft_isalpha(int c);
+int					ft_isalpha(int c);
 
 /*
  * Checks for an numeric character; from '0' to '9'.
  */
-int		ft_isdigit(int c);
+int					ft_isdigit(int c);
 
 /*
- * Checks for an alphanumeric character; it is equivalent to 
+ * Checks for an alphanumeric character; it is equivalent to
  * (isalpha(c) || isdigit(c)).
  */
-int		ft_isalnum(int c);
+int					ft_isalnum(int c);
 
 /*
  * Checks whether c is a 7-bit unsigned char value that fits into
  * the ASCII character set
  */
-int		ft_isascii(int c);
+int					ft_isascii(int c);
 
 /*
  * Checks for any printable character including space.
  */
-int		ft_isprint(int c);
+int					ft_isprint(int c);
 
 /*
  * checks for white-space characters. In the "C" and "POSIX" locales,
  *   these are: space, form-feed ('\f'), newline ('\n'), carriage
  *   return ('\r'), horizontal tab ('\t'), and vertical tab ('\v').
  */
-int		ft_isspace(int c);
+int					ft_isspace(int c);
 
 //= Integer Functions =//
 
 /* Returns the highest of two numbers.
  * @param[in] a First integer.
  * @param[in] b Second integer.
- * @returns the highest of the two integers. 
+ * @returns the highest of the two integers.
  */
-int		ft_highest(int a, int b);
+int					ft_highest(int a, int b);
 
 /* Returns the lowest of two numbers.
  * @param[in] a First integer.
  * @param[in] b Second integer.
- * @returns the lowest of the two integers. 
+ * @returns the lowest of the two integers.
  */
-int		ft_lowest(int a, int b);
+int					ft_lowest(int a, int b);
 
 /* Gets the power of a given base to a power exponent.
    Accepts negative base and power, result must be within an integer size;
@@ -101,7 +101,7 @@ int		ft_lowest(int a, int b);
  * @param[in] power of the exponent, times to multiply.
  * @returns Base raised to the power of power.
  */
-int		ft_pwr(int base, int power);
+int					ft_pwr(int base, int power);
 
 //= Basic String Functions =//
 
@@ -110,7 +110,7 @@ int		ft_pwr(int base, int power);
  * @param[in] c String to get the length of.
  * @returns The length of the string.
  */
-size_t	ft_strlen(const char *c);
+size_t				ft_strlen(const char *c);
 
 /*
  * Copies a string into another null terminating the result.
@@ -120,7 +120,7 @@ size_t	ft_strlen(const char *c);
  * @returns Number of bytes of the resulting string,
  *   useful for calculating truncation
  */
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 
 /*
  * Concatenates a string with another null terminating the result.
@@ -131,21 +131,21 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
  * @returns Number of bytes of the resulting string, if it traversed size bytes
  *   without finding a NULL character it will return size instead
  */
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
+size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
 /*
  * Turns a character into uppercase if it is possible.
  * @param[in] c Character to turn uppercase.
  * @returns int of the character recieved or the uppercase if it's alphabetic.
  */
-int		ft_toupper(int c);
+int					ft_toupper(int c);
 
 /*
  * Turns a character into lowercase if it is possible.
  * @param[in] c Character to turn lowercase.
  * @returns int of the character recieved or the lowercase if it's alphabetic.
  */
-int		ft_tolower(int c);
+int					ft_tolower(int c);
 
 /*
  * Search a character inside a string from start to finish.
@@ -153,7 +153,7 @@ int		ft_tolower(int c);
  * @param[in] c Character to be searched.
  * @returns Pointer to the first occurrence of that character.
  */
-char	*ft_strchr(const char *s, int c);
+char				*ft_strchr(const char *s, int c);
 
 /*
  * Search a character inside a string from end to start.
@@ -161,7 +161,7 @@ char	*ft_strchr(const char *s, int c);
  * @param[in] c Character to be searched.
  * @returns Pointer to the last occurrence of that character.
  */
-char	*ft_strrchr(const char *s, int c);
+char				*ft_strrchr(const char *s, int c);
 
 /*
  * Compares two strings.
@@ -170,7 +170,7 @@ char	*ft_strrchr(const char *s, int c);
  * @returns Difference in the ascii code of the first different character,
  *   or 0 if both strings are equal.
  */
-int		ft_strcmp(char *s1, char *s2);
+int					ft_strcmp(char *s1, char *s2);
 
 /*
  * Compares two strings up to a set length.
@@ -180,7 +180,7 @@ int		ft_strcmp(char *s1, char *s2);
  * @returns Difference in the ascii code of the first different character,
  *   or 0 if both strings are equal up to n bytes.
  */
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /*
  * Searches a string inside another string up to a set length.
@@ -190,7 +190,8 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
  * @returns Pointer to the start of the little string in the big string,
  *   or NULL if it is not found.
  */
-char	*ft_strnstr(const char *big, const char *little, size_t len);
+char				*ft_strnstr(const char *big, const char *little,
+						size_t len);
 
 /*
  * Counts the number of occurrences of a character inside a string.
@@ -198,24 +199,24 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
  * @param[in] c Character to count.
  * @returns Count of that character inside the string.
  */
-int		ft_charcount(const char *str, char c);
+int					ft_charcount(const char *str, char c);
 
 /*
  * Applies a function to each character in the string.
  * @param[in] s String to apply the function to.
  * @param[in] f Function to apply to each character.
  */
-void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 //= ALLOCATING STRING FUNCTIONS =//
 
 /*
  * Creates a duplicate of a string
  * @param[in] s String to be duplicated
- * @returns Pointer to the string duplicated, 
+ * @returns Pointer to the string duplicated,
  *   or NULL if malloc had an error.
  */
-char	*ft_strdup(const char *s);
+char				*ft_strdup(const char *s);
 
 /*
  * Creates a new string from a part of another string.
@@ -224,7 +225,7 @@ char	*ft_strdup(const char *s);
  * @param[in] len Length of the new string to create not including NULL char.
  * @returns Pointer to the new string or NULL if malloc errored
  */
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_substr(char const *s, unsigned int start, size_t len);
 
 /*
  * Creates a new string joining both of the strings provided.
@@ -232,7 +233,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
  * @param[in] s2 Right string of the join.
  * @returns pointer to the new string or NULL if malloc errored.
  */
-char	*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin(char const *s1, char const *s2);
 
 /*
  * Realized a join and frees the left sided string,
@@ -240,7 +241,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
  * @param[in] s2 Right string of the join.
  * @returns pointer to the new string or NULL if malloc errored.
  */
-char	*ft_freejoin(char *s1, char *s2);
+char				*ft_freejoin(char *s1, char *s2);
 
 /*
  * Creates a new string removing a set of characters from the end/start
@@ -249,16 +250,17 @@ char	*ft_freejoin(char *s1, char *s2);
  * @param[in] set Set of characters to remove from the source string.
  * @returns pointer to the new string or NULL if malloc errored.
  */
-char	*ft_strtrim(char const *s1, char const *set);
+char				*ft_strtrim(char const *s1, char const *set);
 
 /*
- * Creates an array of string from a source string splitting it by the delimiter.
+
+	* Creates an array of string from a source string splitting it by the delimiter.
  * @param[in] s Source string.
  * @param[in] c Delimiter to split the string by.
  * @returns Double pointer to the new set of string
  *   terminated with a pointer to NULL, or NULL if malloc errored.
  */
-char	**ft_split(char const *s, char c);
+char				**ft_split(char const *s, char c);
 
 /*
  * Applies a function to each character in the string.
@@ -266,7 +268,7 @@ char	**ft_split(char const *s, char c);
  * @param[in] f Function to apply to each character.
  * @returns Pointer to the new string or NULL if malloc errored.
  */
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 //= Memory functions =//
 
@@ -277,14 +279,14 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
  * @param[in] n Number of bytes to be change.
  * @returns Pointer to the start of the memory range changed.
  */
-void	*ft_memset(void *s, int c, size_t n);
+void				*ft_memset(void *s, int c, size_t n);
 
 /*
  * Sets a range of memory to 0.
  * @param[in] s Pointer to the start of the memory range.
  * @param[in] n Number of bytes to set.
  */
-void	ft_bzero(void *s, size_t n);
+void				ft_bzero(void *s, size_t n);
 
 /*
  * Copies a range of memory to another.
@@ -293,7 +295,7 @@ void	ft_bzero(void *s, size_t n);
  * @param[in] n Size of the memory range.
  * @returns Pointer to the start of target memory range.
  */
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+void				*ft_memcpy(void *dest, const void *src, size_t n);
 
 /*
  * Copies a range of memory to another checking for overlaps.
@@ -302,7 +304,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
  * @param[in] n Size of the memory range.
  * @returns Pointer to the start of target memory range.
  */
-void	*ft_memmove(void *dest, const void *src, size_t n);
+void				*ft_memmove(void *dest, const void *src, size_t n);
 
 /*
  * Search for a value inside a range of memory.
@@ -311,7 +313,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
  * @param[in] n Size of the memory range.
  * @returns Pointer to the first occurrence of the target value.
  */
-void	*ft_memchr(const void *s, int c, size_t n);
+void				*ft_memchr(const void *s, int c, size_t n);
 
 /*
  * Compares two ranges of memory and returns the first difference it finds.
@@ -320,7 +322,7 @@ void	*ft_memchr(const void *s, int c, size_t n);
  * @param[im] n Number of bytes to compare.
  * @returns Difference of the first different values it finds.
  */
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
+int					ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /*
  * Allocates memory for a set of members controlling overflow
@@ -329,47 +331,47 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
  * @param[in] size Size each memeber.
  * @returns Pointer to the alloced memory.
  */
-void	*ft_calloc(size_t nmemb, size_t size);
+void				*ft_calloc(size_t nmemb, size_t size);
 
 //= PRINTING FUNCTIONS =//
 
 /*
  * Write formatted text into stdout.
  */
-ssize_t	ft_printf(char const *str, ...);
+ssize_t				ft_printf(char const *str, ...);
 
 /*
  * Write formatted text into stdout.
  */
-ssize_t	ft_fprintf(int fd, char const *str, ...);
+ssize_t				ft_fprintf(int fd, char const *str, ...);
 
 /*
  * Write a char to a file descriptor.
  * @param[in] c Character to write.
  * @param[in] fd File descriptor to write to.
  */
-ssize_t	ft_putchar_fd(char c, int fd);
+ssize_t				ft_putchar_fd(char c, int fd);
 
 /*
  * Write a string to a file descriptor.
  * @param[in] s String to write.
  * @param[in] fd File descriptor to write to.
  */
-ssize_t	ft_putstr_fd(char *s, int fd);
+ssize_t				ft_putstr_fd(char *s, int fd);
 
 /*
  * Write a string terminating it in a new line to a file descriptor.
  * @param[in] s String to write.
  * @param[in] fd File descriptor to write to.
  */
-ssize_t	ft_putendl_fd(char *s, int fd);
+ssize_t				ft_putendl_fd(char *s, int fd);
 
 /*
  * Write a number to a file descriptor.
  * @param[in] n Number to write.
  * @param[in] fd File descriptor to write to.
  */
-ssize_t	ft_putnbr_fd(int n, int fd);
+ssize_t				ft_putnbr_fd(int n, int fd);
 
 //= CONVERSION FUNCTIONS =//
 
@@ -378,21 +380,21 @@ ssize_t	ft_putnbr_fd(int n, int fd);
  * @param[in] nptr Pointer to the string containing the number.
  * @returns Integer equal to the provided number and 0 if wrong formatted.
  */
-int		ft_atoi(const char *nptr);
+int					ft_atoi(const char *nptr);
 
 /*
  * Converts a integer into a string.
  * @param[in] n Number to convert.
  * @returns String picturing the provided number.
  */
-char	*ft_itoa(int n);
+char				*ft_itoa(int n);
 
 /*
  * Converts a linked list into an array.
  * @param[in] lst Pointer to the node from which to start.
  * @returns Array of pointers to the contents of the list.
  */
-void	**ft_lsttoarr(t_list *lst);
+void				**ft_lsttoarr(t_list *lst);
 
 //= LINKED LISTS =//
 
@@ -402,21 +404,21 @@ void	**ft_lsttoarr(t_list *lst);
  * @returns Pointer to the created node list having both directions
  *   pointers set as NULL if it could not be allocated returns NULL
  */
-t_list	*ft_lstnew(void *content);
+t_list				*ft_lstnew(void *content);
 
 /*
  * Add a new new node to the front of the list.
  * @param[in] lst Memory address of the first node of the list.
  * @param[in] new Pointer to the node to add to the list.
  */
-void	ft_lstadd_front(t_list **lst, t_list *new);
+void				ft_lstadd_front(t_list **lst, t_list *new);
 
 /*
  * Add a new new node to the back of the list.
  * @param[in] lst Memory address of the first node of the list.
  * @param[in] new Pointer to the node to add to the list.
  */
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void				ft_lstadd_back(t_list **lst, t_list *new);
 
 /*
  * Insert a new node inside the list after a given node.
@@ -424,58 +426,66 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
  * @param[in] insert Node to insert after the given node.
  * @returns node inserted, in case of wanting to work with it after insertion.
  */
-t_list	*ft_lstinsert(t_list *node, t_list *insert);
+t_list				*ft_lstinsert(t_list *node, t_list *insert);
 
 /*
  * Gets the full size of the list from the node given.
  * @param[in] lst Node of the list.
  * @returns number of nodes in the list.
  */
-int		ft_lstsize(t_list *lst);
+int					ft_lstsize(t_list *lst);
 
 /*
  * Gets the next side size of the list from the node given.
  * @param[in] lst Node of the list.
  * @returns number of nodes in the list.
  */
-int		ft_lstnextsize(t_list *lst);
+int					ft_lstnextsize(t_list *lst);
 
 /*
  * Gets the prev side size of the list from the node given.
  * @param[in] lst Node of the list.
  * @returns number of nodes in the list.
  */
-int		ft_lstprevsize(t_list *lst);
+int					ft_lstprevsize(t_list *lst);
 
 /*
  * Gets the last node in the list.
  * @param[in] lst Pointer to a node in the list.
  * @returns Pointer to the last node in the list.
  */
-t_list	*ft_lstlast(t_list *lst);
+t_list				*ft_lstlast(t_list *lst);
 
 /*
  * Gets the first node in the list.
  * @param[in] lst Pointer to a node in the list.
  * @returns Pointer to the first node in the list.
  */
-t_list	*ft_lstfirst(t_list *lst);
+t_list				*ft_lstfirst(t_list *lst);
 
-/* Search a node inside a list and returns if cmp(node->content, data_ref) returns 0.
- * @param[in] lst Memory address of the start of the list from which to search in.
- * @param[in] data_ref Value to compare to the content by cmp. if cmp does not need a seconds value can be set as NULL.
+/* Search a node inside a list and returns if cmp(node->content,
+	data_ref) returns 0.
+
+	* @param[in] lst Memory address of the start of the list from which to search in.
+
+	* @param[in] data_ref Value to compare to the content by cmp. if cmp does not need a seconds value can be set as NULL.
  * @param[in] cmp Function used to compare the content in the nodes.
  * @returns The first node that matches with the cmp function.
  */
-t_list	*ft_lstchr(t_list *lst, void *data_ref, int (*cmp)(void *, void *));
+t_list				*ft_lstchr(t_list *lst, void *data_ref, int (*cmp)(void *,
+							void *));
 
-/* Search a node inside a list from the end and returns if cmp(node->content, data_ref) returns 0.
- * @param[in] lst Memory address of the start of the list from which to search in.
- * @param[in] data_ref Value to compare to the content by cmp. if cmp does not need a seconds value can be set as NULL.
+/* Search a node inside a list from the end and returns if cmp(node->content,
+	data_ref) returns 0.
+
+	* @param[in] lst Memory address of the start of the list from which to search in.
+
+	* @param[in] data_ref Value to compare to the content by cmp. if cmp does not need a seconds value can be set as NULL.
  * @param[in] cmp Function used to compare the content in the nodes.
  * @returns The last node that matches with the cmp function.
  */
-t_list	*ft_lstrchr(t_list *lst, void *data_ref, int (*cmp)(void *, void *));
+t_list				*ft_lstrchr(t_list *lst, void *data_ref, int (*cmp)(void *,
+							void *));
 
 /*
  * Frees from memory a especific node.
@@ -483,7 +493,7 @@ t_list	*ft_lstrchr(t_list *lst, void *data_ref, int (*cmp)(void *, void *));
  * @param[in] del Function to free the content of the list,
  *   unless it uses complex structures free() should suffice.
  */
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void				ft_lstdelone(t_list *lst, void (*del)(void *));
 
 /*
  * Frees the list and sets the start to NULL.
@@ -491,14 +501,14 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
  * @param[in] del Function to free the content of the list,
  *   unless it uses complex structures free() should suffice.
  */
-void	ft_lstclear(t_list **lst, void (*del)(void *));
+void				ft_lstclear(t_list **lst, void (*del)(void *));
 
 /*
  * Applies the provided function to the content of every node in the list.
  * @param[in] *lst Pointer to a node in the list to apply to the contents.
  * @param[in] (*f) Funtion to use on every content.
  */
-void	ft_lstiter(t_list *lst, void (*f)(void *));
+void				ft_lstiter(t_list *lst, void (*f)(void *));
 
 /*
  * Creates a new list with a function porvided applied to it and using
@@ -508,7 +518,8 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
  * @param[in] (*del) function to clean the list.
  * @returns Pointer to the start of the new list.
  */
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
+						void (*del)(void *));
 
 /*
  * Removes all connections of a node from a list.
@@ -516,7 +527,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
  * @param[in] node Node to detach from the list.
  * @returns Pointer to the isolated node.
  */
-t_list	*ft_lstdetach(t_list **lst, t_list *node);
+t_list				*ft_lstdetach(t_list **lst, t_list *node);
 
 //= GET NEXT LINE =//
 
@@ -529,7 +540,7 @@ t_list	*ft_lstdetach(t_list **lst, t_list *node);
  * @param[in] fd File descriptor of the file to read from.
  * @returns String of characters in the file.
  */
-char	*get_next_line(int fd);
+char				*get_next_line(int fd);
 
 //= DEPRECATED, DO NOT USE =//
 

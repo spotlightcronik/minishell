@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/01/28 16:58:46 by auloth           ###   ########.fr       */
+/*   Updated: 2025/01/29 15:17:47 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,5 @@ typedef struct s_command
 	char		*output;
 	int			append;
 }				t_command;
-
-
 
 #endif

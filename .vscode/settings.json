@@ -6,6 +6,8 @@
 		"unistd.h": "c",
 		"philosopher.h": "c",
 		"stdio.h": "c",
-		"pthread.h": "c"
+		"pthread.h": "c",
+		"pars.h": "c",
+		"a_minishell.h": "c"
 	}
 }

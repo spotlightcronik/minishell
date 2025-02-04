@@ -6,23 +6,48 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/01/29 11:54:36 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/04 13:58:38 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include "a_minishell.h"
 
-int main(void)
+int init_data(t_info *data, int ac, char **av, char **ip)
 {
-	char *input;
+	data->token_list_size = 0;
+	data->token_list = NULL;
+	data->count = 0;
+	data->env_param = NULL;
+	if (dtll(&data->env_param, ip) != 0)
+		return(1);
+	(void)av;
+	(void)ac;
+	return(0);
+}
 
+int main(int ac, char**av, char **ip)
+{
+	t_info data;
+	int count;
+
+	count = 0;
+	if(init_data(&data, ac, av, ip) != 0)
+		return(clenup1());
 	while (1)
 	{
-		input = readline("prompt > ");
-		if(!input)
+		data.str = readline("prompt > ");
+		if(!data.str)
 			perror("read line");
-		
-		printf("%s\n", input);
+		tokenize(&data);
+		while (count < data.token_list_size)
+		{
+			printf("\n%s\n", data.token_list[count].type);
+			printf("%s\n", data.token_list[count].content);
+			free(data.token_list[count].content);
+			free(data.token_list[count].type);
+			count++;
+		}
+		free(data.str);
 	}
 	return(0);
 

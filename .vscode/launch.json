@@ -6,7 +6,7 @@
             "name": "Debug map3d",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/philo", // Path to your existing executable
+            "program": "${workspaceFolder}/minishell", // Path to your existing executable
             "args": ["4", "310", "", "100", "-50"], // Arguments to pass to your program, if any
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}", // Working directory

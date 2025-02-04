@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:31:26 by jeperez-          #+#    #+#             */
-/*   Updated: 2024/10/28 17:34:34 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:04:01 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	**ft_lsttoarr(t_list *lst)
 
 	if (!lst)
 		return (0);
-	value = ft_calloc(ft_lstsize(lst), sizeof(void *));
+	value = ft_calloc(ft_lstsize(lst) + 1, sizeof(void *));
 	if (!value)
 		return (0);
 	index = 0;

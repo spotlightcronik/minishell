@@ -6,18 +6,18 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:04:35 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:15:43 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:20:15 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static pipe_t	*prepare_pipes(int size)
+static t_pipe	*prepare_pipes(int size)
 {
-	pipe_t	*pipe_bundle;
+	t_pipe	*pipe_bundle;
 	int		index;
-	
-	pipe_bundle = ft_calloc(size, sizeof(pipe_t));
+
+	pipe_bundle = ft_calloc(size, sizeof(t_pipe));
 	if (!pipe_bundle)
 		return (NULL);
 	index = 0;
@@ -47,8 +47,8 @@ static char	**prepare_args(t_command *cmd)
 		if (!args)
 			return (NULL);
 		args[0] = cmd->name;
-		index = 0;
-		while (cmd->args[index])
+		index = -1;
+		while (cmd->args[++index])
 			args[index + 1] = cmd->args[index];
 	}
 	else
@@ -66,7 +66,7 @@ static int	handler(void *s1, void *s2)
 	return (ft_strncmp(s1, s2, ft_strlen(s2)));
 }
 
-static char *check_cmd_path(char **split_path, char *cmd_name)
+static char	*check_cmd_path(char **split_path, char *cmd_name)
 {
 	int		index;
 	char	*cmd_path;
@@ -113,12 +113,11 @@ static char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
 
 static void	execute_cmd(t_command *cmd, t_list *ep_lst)
 {
-	t_execution	exec;
 	char		*cmd_path;
 	char		**args;
 	char		**envp;
 
-	prepare_exec(*cmd, &exec);
+	prepare_exec(*cmd);
 	cmd_path = get_cmd_path(cmd, ep_lst);
 	args = prepare_args(cmd);
 	envp = (char **)ft_lsttoarr(ep_lst);
@@ -128,7 +127,7 @@ static void	execute_cmd(t_command *cmd, t_list *ep_lst)
 	}
 }
 
-static pid_t	ft_fork(t_command *cmd, fd_t in, fd_t out, t_list *envp)
+static pid_t	ft_fork(t_command *cmd, t_fd in, t_fd out, t_list *envp)
 {
 	pid_t	pid;
 
@@ -136,7 +135,11 @@ static pid_t	ft_fork(t_command *cmd, fd_t in, fd_t out, t_list *envp)
 	if (!pid)
 	{
 		dup2(in, STDIN_FILENO);
+		if (in != STDIN_FILENO)
+			close(in);
 		dup2(out, STDOUT_FILENO);
+		if (out != STDOUT_FILENO)
+			close(out);
 		execute_cmd(cmd, envp);
 	}
 	return (pid);
@@ -145,7 +148,7 @@ static pid_t	ft_fork(t_command *cmd, fd_t in, fd_t out, t_list *envp)
 static pid_t	multiple_cmd(t_list *lst, int size, t_list *envp)
 {
 	pid_t	pid;
-	pipe_t	*pipe_bundle;
+	t_pipe	*pipe_bundle;
 	int		index;
 
 	pipe_bundle = prepare_pipes(size);
@@ -155,15 +158,18 @@ static pid_t	multiple_cmd(t_list *lst, int size, t_list *envp)
 		if (index == 0)
 			pid = ft_fork(lst->content, 0, pipe_bundle[0][1], envp);
 		else if (index != size - 1)
-			pid = ft_fork(lst->content, pipe_bundle[index - 1][0], pipe_bundle[index][1], envp);
+			pid = ft_fork(lst->content, pipe_bundle[index - 1][0],
+					pipe_bundle[index][1], envp);
 		else
 			pid = ft_fork(lst->content, pipe_bundle[index - 1][0], 1, envp);
 		close(pipe_bundle[index][1]);
-		if (index != 1)
+		if (index)
 			close(pipe_bundle[index - 1][0]);
 		index++;
 		lst = lst->next;
 	}
+	close(pipe_bundle[index - 1][0]);
+	free(pipe_bundle);
 	return (pid);
 }
 
@@ -180,5 +186,4 @@ void	execute_line(t_list *lst, t_list *envp)
 	else
 		pid = multiple_cmd(lst, size, envp);
 	waitpid(pid, NULL, 0);
-	ft_lstiter(lst, free_cmd);
 }

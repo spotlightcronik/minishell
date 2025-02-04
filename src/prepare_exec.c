@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:10:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/04 13:51:38 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:20:23 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	heredoc_child(char delim)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(STDIN_FILENO);
-	while(line)
+	while (line)
 	{
 		if (line[0] == delim && line[1] == '\n' && line[2] == 0)
-			break;
+			break ;
 		ft_putstr_fd(line, STDOUT_FILENO);
 		free(line);
 		line = get_next_line(STDIN_FILENO);
@@ -28,9 +28,9 @@ static void	heredoc_child(char delim)
 	exit(0);
 }
 
-static void	prepare_heredoc(t_command cmd, t_execution *exec)
+static void	prepare_heredoc(t_command cmd)
 {
-	fd_t	fd;
+	t_fd	fd;
 	pid_t	pid;
 
 	if (!cmd.heredoc)
@@ -39,16 +39,17 @@ static void	prepare_heredoc(t_command cmd, t_execution *exec)
 	pid = fork();
 	if (!pid)
 	{
-		dup2(exec->in_fd, STDIN_FILENO);
 		dup2(fd, STDOUT_FILENO);
+		close(fd);
 		heredoc_child(cmd.heredoc);
 	}
-	exec->in_fd = fd;
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 }
 
 static void	prepare_infile(t_command cmd)
 {
-	fd_t	in_fd;
+	t_fd	in_fd;
 
 	if (!cmd.infile)
 		return ;
@@ -58,12 +59,15 @@ static void	prepare_infile(t_command cmd)
 		return ;
 	in_fd = open(cmd.infile, O_RDONLY);
 	if (in_fd != -1)
+	{
 		dup2(in_fd, STDIN_FILENO);
+		close(in_fd);
+	}
 }
 
-static void	prepare_outfile(t_command cmd, t_execution *exec)
+static void	prepare_outfile(t_command cmd)
 {
-	fd_t	out_fd;
+	t_fd	out_fd;
 
 	if (!cmd.outfile)
 		return ;
@@ -71,26 +75,23 @@ static void	prepare_outfile(t_command cmd, t_execution *exec)
 	{
 		while (access(cmd.outfile, F_OK) == 0)
 			unlink(cmd.outfile);
-		out_fd = open(cmd.outfile, O_CREAT|O_WRONLY, 00644);
+		out_fd = open(cmd.outfile, O_CREAT | O_WRONLY, 00644);
 	}
 	else
-		out_fd = open(cmd.outfile, O_CREAT|O_APPEND|O_WRONLY, 00644);
+		out_fd = open(cmd.outfile, O_CREAT | O_APPEND | O_WRONLY, 00644);
 	if (out_fd != -1)
-		exec->out_fd = out_fd;
+	{
+		dup2(out_fd, STDOUT_FILENO);
+		close(out_fd);
+	}
 }
 
-void	prepare_exec(t_command cmd, t_execution *exec)
+void	prepare_exec(t_command cmd)
 {
-	ft_bzero(exec, sizeof(exec));
 	if (cmd.infile)
 		prepare_infile(cmd);
 	if (cmd.heredoc)
-		prepare_heredoc(cmd, exec);
+		prepare_heredoc(cmd);
 	if (cmd.outfile)
-		prepare_outfile(cmd, exec);
-	if (exec->out_fd)
-	{
-		dup2(exec->out_fd, STDOUT_FILENO);
-		close(exec->out_fd);
-	}
+		prepare_outfile(cmd);
 }

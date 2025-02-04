@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:33:01 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/04 12:50:09 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:18:29 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	free_cmd(void *ptr)
 {
-	int	index;
-	t_command *cmd;
+	int			index;
+	t_command	*cmd;
 
 	cmd = ptr;
 	if (cmd)
@@ -29,9 +29,10 @@ void	free_cmd(void *ptr)
 			index = 0;
 			while (cmd->args[index])
 			{
-				free(cmd->infile);
+				free(cmd->args[index]);
 				index++;
 			}
+			free(cmd->args);
 		}
 		if (cmd->outfile)
 			free(cmd->outfile);

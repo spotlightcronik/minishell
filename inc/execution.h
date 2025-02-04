@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/04 13:50:09 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:15:30 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-typedef int fd_t;
-typedef fd_t pipe_t[2];
-
-typedef struct s_execution
-{
-	fd_t	in_fd;
-	char	*cmd_path;
-	fd_t	out_fd;
-}			t_execution;
+typedef int		t_fd;
+typedef t_fd	t_pipe[2];
 
 void	execute_line(t_list *lst, t_list *envp);
-void	prepare_exec(t_command cmd, t_execution *exec);
+void	prepare_exec(t_command cmd);
 
 void	free_cmd(void *cmd);
 

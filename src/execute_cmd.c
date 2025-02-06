@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_line.c                                     :+:      :+:    :+:   */
+/*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 12:04:35 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/04 16:20:15 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/02/06 15:38:34 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/02/06 15:43:16 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-static t_pipe	*prepare_pipes(int size)
-{
-	t_pipe	*pipe_bundle;
-	int		index;
-
-	pipe_bundle = ft_calloc(size, sizeof(t_pipe));
-	if (!pipe_bundle)
-		return (NULL);
-	index = 0;
-	while (index < size)
-	{
-		if (pipe(pipe_bundle[index]) == -1)
-		{
-			free(pipe_bundle);
-			return (NULL);
-		}
-		index++;
-	}
-	return (pipe_bundle);
-}
 
 static char	**prepare_args(t_command *cmd)
 {
@@ -61,16 +40,13 @@ static char	**prepare_args(t_command *cmd)
 	return (args);
 }
 
-static int	handler(void *s1, void *s2)
-{
-	return (ft_strncmp(s1, s2, ft_strlen(s2)));
-}
-
 static char	*check_cmd_path(char **split_path, char *cmd_name)
 {
 	int		index;
 	char	*cmd_path;
 
+	if (access(cmd_name, X_OK) == 0)
+		return (cmd_name);
 	index = 0;
 	while (split_path[index])
 	{
@@ -93,11 +69,10 @@ static char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
 	char	**splitted;
 	int		index;
 
-	node = ft_lstchr(ep_lst, "PATH", handler);
-	if (!node)
+	path = ft_getenv(ep_lst, "PATH");
+	if (!path)
 		return (NULL);
-	path = node->content;
-	splitted = ft_split(path + 5, ':');
+	splitted = ft_split(path, ':');
 	if (!splitted)
 		return (NULL);
 	full_cmd = check_cmd_path(splitted, cmd->name);
@@ -125,65 +100,4 @@ static void	execute_cmd(t_command *cmd, t_list *ep_lst)
 	{
 		exit(1);
 	}
-}
-
-static pid_t	ft_fork(t_command *cmd, t_fd in, t_fd out, t_list *envp)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (!pid)
-	{
-		dup2(in, STDIN_FILENO);
-		if (in != STDIN_FILENO)
-			close(in);
-		dup2(out, STDOUT_FILENO);
-		if (out != STDOUT_FILENO)
-			close(out);
-		execute_cmd(cmd, envp);
-	}
-	return (pid);
-}
-
-static pid_t	multiple_cmd(t_list *lst, int size, t_list *envp)
-{
-	pid_t	pid;
-	t_pipe	*pipe_bundle;
-	int		index;
-
-	pipe_bundle = prepare_pipes(size);
-	index = 0;
-	while (lst)
-	{
-		if (index == 0)
-			pid = ft_fork(lst->content, 0, pipe_bundle[0][1], envp);
-		else if (index != size - 1)
-			pid = ft_fork(lst->content, pipe_bundle[index - 1][0],
-					pipe_bundle[index][1], envp);
-		else
-			pid = ft_fork(lst->content, pipe_bundle[index - 1][0], 1, envp);
-		close(pipe_bundle[index][1]);
-		if (index)
-			close(pipe_bundle[index - 1][0]);
-		index++;
-		lst = lst->next;
-	}
-	close(pipe_bundle[index - 1][0]);
-	free(pipe_bundle);
-	return (pid);
-}
-
-void	execute_line(t_list *lst, t_list *envp)
-{
-	pid_t	pid;
-	int		size;
-
-	if (!lst)
-		return ;
-	size = ft_lstsize(lst);
-	if (size == 1)
-		pid = ft_fork(lst->content, 0, 1, envp);
-	else
-		pid = multiple_cmd(lst, size, envp);
-	waitpid(pid, NULL, 0);
 }

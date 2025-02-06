@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list.c                                      :+:      :+:    :+:   */
+/*   token_linked_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/04 13:58:43 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/05 17:46:42 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	stll(t_list **list, t_command *arr, int size)
 	{
 		temp = ft_lstnew((void *)&arr[count]);
 		if (!temp)
-			return (clenup());
+			return (1);
 		ft_lstadd_back(list, temp);
 		count++;
 	}
@@ -39,7 +39,7 @@ int	dtll(t_list **list, char **arr)
 	{
 		temp = ft_lstnew((void *)arr[count]);
 		if (!temp)
-			return (clenup());
+			return (1);
 		ft_lstadd_back(list, temp);
 		count++;
 	}
@@ -66,7 +66,7 @@ int	insert_envpar(char **dest, char *add, int place)
 		count++;
 	}
 	new[count] = 0;
-	ft_strlcat(new, add,ft_strlen((*dest)) + ft_strlen(add));
+	ft_strlcat(new, add, ft_strlen((*dest)) + ft_strlen(add));
 	count++;
 	while (ft_isalpha((*dest)[count]) || ft_isdigit((*dest)[count])
 		|| (*dest)[count] == '_')
@@ -74,7 +74,7 @@ int	insert_envpar(char **dest, char *add, int place)
 	ft_strlcat(new, &(*dest)[count], ft_strlen((*dest)) + ft_strlen(add) + 1);
 	free(*dest);
 	*dest = new;
-	return(0);
+	return (0);
 }
 
 int	ft_getenv(t_info *data, int co, int insert)
@@ -90,7 +90,7 @@ int	ft_getenv(t_info *data, int co, int insert)
 	arr = malloc(((count - co) + 1) * sizeof(char));
 	if (!arr)
 		return (1);
-	ft_strlcpy(arr, &data->str[co], count - co);
+	ft_strlcpy(arr, &data->str[co], count - co + 1);
 	count = 0;
 	temp = ft_lstchr(data->env_param, arr, handler);
 	if (!temp)
@@ -100,7 +100,7 @@ int	ft_getenv(t_info *data, int co, int insert)
 	while (arr[count] != '=')
 		count++;
 	count++;
-	if(insert == 1)
-		return(insert_envpar(&data->str, &arr[count], data->count));
-	return(create_token(data, &arr[count], "env param"));
+	if (insert == 1)
+		return (insert_envpar(&data->str, &arr[count], co - 1));
+	return (data->count++, create_token(data, &arr[count], "env param"));
 }

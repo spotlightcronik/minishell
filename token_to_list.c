@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:56:41 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/04 13:58:25 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/04 17:05:28 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	add_token(t_info *data, t_token tk)
 	count = 0;
 	temp = malloc((data->token_list_size + 1) * sizeof(t_token));
 	if (!temp)
-		return (clenup());
+		return (1);
 	data->token_list_size++;
 	while (count < data->token_list_size - 1)
 	{
@@ -40,12 +40,12 @@ int create_token(t_info *data, char *simbol, char *name)
 
 	add.content = ft_strdup(simbol);
 	if (!add.content)
-		return(clenup());
+		return(1);
 	add.type = ft_strdup(name);
 	if(!add.type)
-		return(clenup());
+		return(1);
 	if(add_token(data, add) != 0)
-		return(clenup());
+		return(1);
 	return(0);
 }
 

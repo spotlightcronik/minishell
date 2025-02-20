@@ -6,64 +6,22 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/06 15:40:58 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:47:53 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-static int	is_builtin(char *cmd_name)
-{
-	if (!ft_strcmp(cmd_name, "echo"))
-		return (1);
-	if (!ft_strcmp(cmd_name, "cd"))
-		return (1);
-	if (!ft_strcmp(cmd_name, "pwd"))
-		return (1);
-	if (!ft_strcmp(cmd_name, "export"))
-		return (1);
-	if (!ft_strcmp(cmd_name, "unset"))
-		return (1);
-	if (!ft_strcmp(cmd_name, "env"))
-		return (1);
-	if (!ft_strcmp(cmd_name, "exit"))
-		return (1);
-	return (0);
-}
-
-static pid_t	ft_fork(t_command *cmd, t_fd in, t_fd out, t_list *envp)
-{
-	pid_t	pid;
-
-	if (!is_builtin(cmd->name))
-	{
-		pid = fork();
-		if (!pid)
-		{
-			dup2(in, STDIN_FILENO);
-			if (in != STDIN_FILENO)
-				close(in);
-			dup2(out, STDOUT_FILENO);
-			if (out != STDOUT_FILENO)
-				close(out);
-			execute_cmd(cmd, envp);
-		}
-	}
-	else
-		pid = execute_builtin(cmd, in, out, envp);
-	return (pid);
-}
 
 static t_pipe	*prepare_pipes(int size)
 {
 	t_pipe	*pipe_bundle;
 	int		index;
 
-	pipe_bundle = ft_calloc(size, sizeof(t_pipe));
+	pipe_bundle = ft_calloc(size - 1, sizeof(t_pipe));
 	if (!pipe_bundle)
 		return (NULL);
 	index = 0;
-	while (index < size)
+	while (index < size - 1)
 	{
 		if (pipe(pipe_bundle[index]) == -1)
 		{
@@ -75,46 +33,53 @@ static t_pipe	*prepare_pipes(int size)
 	return (pipe_bundle);
 }
 
-static pid_t	multiple_cmd(t_list *lst, int size, t_list *envp)
+static void	multiple_cmd(t_execution *exec)
 {
-	pid_t	pid;
 	t_pipe	*pipe_bundle;
-	int		index;
 
-	pipe_bundle = prepare_pipes(size);
-	index = 0;
-	while (lst)
+	pipe_bundle = prepare_pipes(exec->size);
+	if (!pipe_bundle)
+		return ;
+	while (exec->current)
 	{
-		if (index == 0)
-			pid = ft_fork(lst->content, 0, pipe_bundle[0][1], envp);
-		else if (index != size - 1)
-			pid = ft_fork(lst->content, pipe_bundle[index - 1][0],
-					pipe_bundle[index][1], envp);
+		if (exec->index == 0)
+			ft_fork(exec, 0, pipe_bundle[0][1]);
+		else if (exec->index != exec->size - 1)
+			ft_fork(exec, pipe_bundle[exec->index - 1][0], pipe_bundle[exec->index][1]);
 		else
-			pid = ft_fork(lst->content, pipe_bundle[index - 1][0], 1, envp);
-		close(pipe_bundle[index][1]);
-		if (index)
-			close(pipe_bundle[index - 1][0]);
-		index++;
-		lst = lst->next;
+			ft_fork(exec, pipe_bundle[exec->index - 1][0], 1);
+		close(pipe_bundle[exec->index][1]);
+		if (exec->index)
+			close(pipe_bundle[exec->index - 1][0]);
+		exec->index++;
+		exec->current = exec->current->next;
 	}
-	close(pipe_bundle[index - 1][0]);
+	close(pipe_bundle[exec->index - 1][0]);
 	free(pipe_bundle);
-	return (pid);
+}
+
+void	parse_to_exec(t_execution *exec, t_list *cmds, t_list *envp)
+{
+	ft_bzero(exec, sizeof(exec));
+	exec->cmds = cmds;
+	exec->envp = envp;
+	exec->current = exec->cmds;
+	exec->size = ft_lstsize(exec->cmds);
 }
 
 void	execute_line(t_list *lst, t_list *envp)
 {
-	pid_t	pid;
-	int		size;
+	t_execution	exec;
 
-	if (!lst)
+	if (!exec.cmds)
 		return ;
-	size = ft_lstsize(lst);
-	if (size == 1)
-		pid = ft_fork(lst->content, 0, 1, envp);
+	parse_to_exec(&exec, lst, envp);
+	if (exec.size == 1)
+		ft_fork(&exec, 0, 1);
 	else
-		pid = multiple_cmd(lst, size, envp);
-	if (pid)
-		waitpid(pid, NULL, 0);
+		multiple_cmd(&exec);
+	if (exec.exit)
+		//to-do
+	if (exec.pid)
+		waitpid(exec.pid, NULL, 0);
 }

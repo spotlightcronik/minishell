@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/01/28 16:09:24 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:58:51 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 typedef struct s_command
 {
 	char	*infile;
-	char	heredoc;
+	char	*heredoc;
 	char	*name;
 	char	**args;
 	char	*outfile;

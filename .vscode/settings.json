@@ -4,6 +4,8 @@
 		"fcntl.h": "c",
 		"t_command.h": "c",
 		"types.h": "c",
-		"wait.h": "c"
+		"wait.h": "c",
+		"stdio.h": "c",
+		"unistd.h": "c"
 	}
 }

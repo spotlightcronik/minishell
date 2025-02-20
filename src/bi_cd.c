@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:28:07 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/06 16:45:18 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:57:17 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static char	*add_pwd(char *current, char *splitted)
 	return (placeholder);
 }
 
-static void change_pwd_relative(t_command *cmd, t_list *envp)
+static void	change_pwd_relative(t_command *cmd, t_list *envp)
 {
 	char	*placeholder;
 	char	**splitted;
 	int		index;
-	
+
 	placeholder = ft_strdup(ft_getenv(envp, "PWD"));
 	if (!placeholder)
 		return ;
@@ -60,24 +60,29 @@ static void change_pwd_relative(t_command *cmd, t_list *envp)
 	free(placeholder);
 }
 
-static void	change_pwd(t_command *cmd, t_list *envp)
+static void	change_pwd(t_execution *exec)
 {
+	t_command	*cmd;
+
+	cmd = exec->current->content;
 	if (!cmd->args)
-		ft_setenv(envp, "PWD", ft_getenv(envp, "HOME"));
+		ft_setenv(exec->envp, "PWD", ft_getenv(exec->envp, "HOME"));
 	else if (cmd->args[0][0] == '/')
-		ft_setenv(envp, "PATH", cmd->args[0]);
+		ft_setenv(exec->envp, "PATH", cmd->args[0]);
 	else
-		change_pwd_relative(cmd, envp);
+		change_pwd_relative(cmd, exec->envp);
 }
 
-void	execute_cd(t_command *cmd, t_list *envp)
+void	execute_cd(t_execution *exec)
 {
-	int	ret;
+	t_command	*cmd;
+	int			ret;
 
+	cmd = exec->current->content;
 	if (cmd->args)
 		ret = chdir(cmd->args[0]);
 	else
-		ret = chdir(ft_getenv(envp, "HOME"));
+		ret = chdir(ft_getenv(exec->envp, "HOME"));
 	if (ret != 0)
 	{
 		if (!cmd->args)
@@ -91,5 +96,5 @@ void	execute_cd(t_command *cmd, t_list *envp)
 		}
 	}
 	else
-		change_pwd(cmd, envp);
+		change_pwd(exec);
 }

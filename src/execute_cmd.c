@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:38:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/06 15:43:16 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:27:47 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static char	*check_cmd_path(char **split_path, char *cmd_name)
 
 static char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
 {
-	t_list	*node;
 	char	*full_cmd;
 	char	*path;
 	char	**splitted;
@@ -86,18 +85,21 @@ static char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
 	return (full_cmd);
 }
 
-static void	execute_cmd(t_command *cmd, t_list *ep_lst)
+void	execute_cmd(t_execution *exec)
 {
 	char		*cmd_path;
 	char		**args;
 	char		**envp;
 
-	prepare_exec(*cmd);
-	cmd_path = get_cmd_path(cmd, ep_lst);
-	args = prepare_args(cmd);
-	envp = (char **)ft_lsttoarr(ep_lst);
+	prepare_exec(exec->current->content);
+	cmd_path = get_cmd_path(exec->current->content, exec->envp);
+	args = prepare_args(exec->current->content);
+	envp = (char **)ft_lsttoarr(exec->envp);
 	if (execve(cmd_path, args, envp) == -1)
 	{
-		exit(1);
+		if (!cmd_path)
+			perror("Command not found");
+		else if (access(cmd_path, X_OK) == -1)
+			perror("Permission denied");
 	}
 }

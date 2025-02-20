@@ -1,0 +1,11 @@
+*
+
+!.gitignore
+!inc
+!inc/*
+!lib
+!lib/*
+!src
+!src/*
+src/execution_parser.c
+!Makefile

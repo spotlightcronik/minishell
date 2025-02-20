@@ -6,20 +6,21 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:10:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/04 16:20:23 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:52:17 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static void	heredoc_child(char delim)
+static void	heredoc_child(char *delim)
 {
 	char	*line;
 
 	line = get_next_line(STDIN_FILENO);
 	while (line)
 	{
-		if (line[0] == delim && line[1] == '\n' && line[2] == 0)
+		if (!ft_strncmp(line, delim, ft_strlen(delim))
+			&& line[ft_strlen(delim)] == '\n')
 			break ;
 		ft_putstr_fd(line, STDOUT_FILENO);
 		free(line);
@@ -28,36 +29,36 @@ static void	heredoc_child(char delim)
 	exit(0);
 }
 
-static void	prepare_heredoc(t_command cmd)
+static void	prepare_heredoc(t_command *cmd)
 {
-	t_fd	fd;
+	t_pipe	pip;
 	pid_t	pid;
 
-	if (!cmd.heredoc)
+	if (!cmd->heredoc)
 		return ;
-	fd = open("/tmp/", __O_TMPFILE | O_RDWR, 00644);
+	pipe(pip);
 	pid = fork();
 	if (!pid)
 	{
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-		heredoc_child(cmd.heredoc);
+		dup2(pip[1], STDOUT_FILENO);
+		close(pip[0]);
+		heredoc_child(cmd->heredoc);
 	}
-	dup2(fd, STDIN_FILENO);
-	close(fd);
+	dup2(pip[0], STDIN_FILENO);
+	close(pip[1]);
 }
 
-static void	prepare_infile(t_command cmd)
+static void	prepare_infile(t_command *cmd)
 {
 	t_fd	in_fd;
 
-	if (!cmd.infile)
+	if (!cmd->infile)
 		return ;
-	if (access(cmd.infile, F_OK))
+	if (access(cmd->infile, F_OK))
 		return ;
-	if (access(cmd.infile, R_OK))
+	if (access(cmd->infile, R_OK))
 		return ;
-	in_fd = open(cmd.infile, O_RDONLY);
+	in_fd = open(cmd->infile, O_RDONLY);
 	if (in_fd != -1)
 	{
 		dup2(in_fd, STDIN_FILENO);
@@ -65,20 +66,20 @@ static void	prepare_infile(t_command cmd)
 	}
 }
 
-static void	prepare_outfile(t_command cmd)
+static void	prepare_outfile(t_command *cmd)
 {
 	t_fd	out_fd;
 
-	if (!cmd.outfile)
+	if (!cmd->outfile)
 		return ;
-	if (!cmd.append)
+	if (!cmd->append)
 	{
-		while (access(cmd.outfile, F_OK) == 0)
-			unlink(cmd.outfile);
-		out_fd = open(cmd.outfile, O_CREAT | O_WRONLY, 00644);
+		while (access(cmd->outfile, F_OK) == 0)
+			unlink(cmd->outfile);
+		out_fd = open(cmd->outfile, O_CREAT | O_WRONLY, 00644);
 	}
 	else
-		out_fd = open(cmd.outfile, O_CREAT | O_APPEND | O_WRONLY, 00644);
+		out_fd = open(cmd->outfile, O_CREAT | O_APPEND | O_WRONLY, 00644);
 	if (out_fd != -1)
 	{
 		dup2(out_fd, STDOUT_FILENO);
@@ -86,12 +87,15 @@ static void	prepare_outfile(t_command cmd)
 	}
 }
 
-void	prepare_exec(t_command cmd)
+void	prepare_exec(t_execution *exec)
 {
-	if (cmd.infile)
+	t_command	*cmd;
+
+	cmd = exec->current->content;
+	if (cmd->infile)
 		prepare_infile(cmd);
-	if (cmd.heredoc)
+	if (cmd->heredoc)
 		prepare_heredoc(cmd);
-	if (cmd.outfile)
+	if (cmd->outfile)
 		prepare_outfile(cmd);
 }

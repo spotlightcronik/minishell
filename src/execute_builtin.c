@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:41:40 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/20 15:46:17 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:12:39 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	execute_printbi(t_execution *exec, t_fd in, t_fd out)
 
 static void	execute_actionbi(t_execution *exec)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
 	cmd = exec->current->content;
 	if (!ft_strcmp(cmd->name, "cd"))

@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/20 15:57:31 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:17:42 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@
 
 typedef int		t_fd;
 typedef t_fd	t_pipe[2];
-typedef struct	s_execution
+typedef struct s_execution
 {
 	t_list		*cmds;
 	t_list		*current;
 	t_list		*envp;
-	t_bool		exit;
 	int			size;
 	int			index;
 	pid_t		pid;

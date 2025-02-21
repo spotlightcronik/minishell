@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:11:39 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/20 15:48:04 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:11:50 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	is_builtin(char *cmd_name)
 void	ft_fork(t_execution *exec, t_fd in, t_fd out)
 {
 	t_command	*cmd;
-	
+
 	cmd = exec->current->content;
 	if (!is_builtin(cmd->name))
 	{

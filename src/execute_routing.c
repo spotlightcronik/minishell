@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/20 15:47:53 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:12:09 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	multiple_cmd(t_execution *exec)
 		if (exec->index == 0)
 			ft_fork(exec, 0, pipe_bundle[0][1]);
 		else if (exec->index != exec->size - 1)
-			ft_fork(exec, pipe_bundle[exec->index - 1][0], pipe_bundle[exec->index][1]);
+			ft_fork(exec, pipe_bundle[exec->index - 1][0],
+				pipe_bundle[exec->index][1]);
 		else
 			ft_fork(exec, pipe_bundle[exec->index - 1][0], 1);
 		close(pipe_bundle[exec->index][1]);
@@ -78,8 +79,6 @@ void	execute_line(t_list *lst, t_list *envp)
 		ft_fork(&exec, 0, 1);
 	else
 		multiple_cmd(&exec);
-	if (exec.exit)
-		//to-do
 	if (exec.pid)
 		waitpid(exec.pid, NULL, 0);
 }

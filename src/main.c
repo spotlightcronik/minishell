@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 17:41:25 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 17:42:37 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int ac, char **av, char **ip)
 	while (1)
 	{
 		if (init_data(&data, ac, av, ip) != 0)
-		ºreturn (clenup(&data));
+		return (clenup(&data));
 		data.str = readline("prompt > ");
 		if (!data.str)
 			perror("read line");

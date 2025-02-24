@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:09:05 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 15:01:16 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:54:37 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	add_word(t_info *data, char *word)
 			return (1);
 		while (add->args[count] != NULL)
 			count++;
-		add->args[count] = word;
+		add->args[count] = ft_strdup(word);
 	}
 	else
 	{

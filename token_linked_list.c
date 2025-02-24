@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/05 17:46:42 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:20:05 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,63 @@ int	insert_envpar(char **dest, char *add, int place)
 	return (0);
 }
 
+int no_env_copy(t_info *data, int co, char *temp)
+{
+	int count;
+	int count2;
+
+	count = 0;
+	count2 = 0;
+	while(count < co - 1)
+	{
+		temp[count] = data->str[count];
+		count++;
+	}
+	count2 = count;
+	count++;
+	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])
+		|| data->str[count] == '_')
+		count++;
+	if(data->str[count] == ' ')
+		count++;
+	while (data->str[count] != 0)
+	{
+		temp[count2] = data->str[count];
+		count++;
+		count2++;
+	}
+	if ((temp[co - 1] == 34) || temp[co - 1] == 39)
+			set_q(data, temp[co - 1]);
+	return(temp[count2] = 0, free(data->str), data->str = temp, 0);
+}
+
+int no_env(t_info *data, int co)
+{
+	int count;
+	int size;
+	char *temp;
+
+	count = 0;
+	size = 0;
+	while(count < co)
+		count++;
+	size = count;
+	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])
+		|| data->str[count] == '_')
+		count++;
+	if(data->str[count] == ' ')
+		count++;
+	while (data->str[count] != 0)
+	{
+		count++;
+		size++;
+	}
+	temp = malloc(size + 1);
+	if (!temp)
+		return (1);
+	return(no_env_copy(data, co, temp));
+}
+
 int	ft_getenv(t_info *data, int co, int insert)
 {
 	t_list	*temp;
@@ -94,7 +151,7 @@ int	ft_getenv(t_info *data, int co, int insert)
 	count = 0;
 	temp = ft_lstchr(data->env_param, arr, handler);
 	if (!temp)
-		return (1);
+		return (no_env(data, co));
 	free(arr);
 	arr = (char *)temp->content;
 	while (arr[count] != '=')

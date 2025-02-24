@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:23:28 by jeperez-          #+#    #+#             */
-/*   Updated: 2024/09/18 13:28:19 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:43:10 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	isspace(char c)
-{
-	if (c >= '\t' && c <= '\r')
-		return (1);
-	if (c == 32)
-		return (1);
-	return (0);
-}
 
 static int	get_nbr(const char *nptr)
 {
@@ -43,7 +34,7 @@ int	ft_atoi(const char *nptr)
 	int	sign;
 
 	index = 0;
-	while (isspace(nptr[index]))
+	while (ft_isspace(nptr[index]))
 		index++;
 	sign = 1;
 	if (nptr[index] == '-')

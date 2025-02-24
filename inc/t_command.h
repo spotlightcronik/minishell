@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/01/29 15:17:47 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/20 14:23:04 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 typedef struct s_command
 {
 	char		*infile;
-	char		heredoc;
+	char		*heredoc;
 	char		*name;
 	char		**args;
 	char		*output;

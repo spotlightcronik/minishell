@@ -6,11 +6,13 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:02 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 12:35:19 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:40:39 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
+extern int global;
 
 void	execute_unset(t_execution *exec)
 {
@@ -101,7 +103,7 @@ void	execute_exit(t_execution *exec)
 		ft_printf("Usage: exit [number]\n");
 	else
 	{
-		exit_code = 0; //to-do change to global.
+		exit_code = global;
 		if (argc)
 			exit_code = ft_atoi(cmd->args[0]);
 		if (exec->cmds)

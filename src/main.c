@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 17:42:37 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 17:44:21 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
+
+int global = 0;
 
 int	init_data(t_info *data, int ac, char **av, char **ip)
 {

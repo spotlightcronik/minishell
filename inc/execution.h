@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/21 11:17:42 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:23:06 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_execution
 }	t_execution;
 
 void	execute_line(t_list *lst, t_list *envp);
-void	prepare_exec(t_execution *exec);
+void	prepare_exec(t_command *cmd);
 void	execute_builtin(t_execution *exec, t_fd in, t_fd out);
 void	ft_fork(t_execution *exec, t_fd in, t_fd out);
 

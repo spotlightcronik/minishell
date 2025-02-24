@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:02 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/21 11:10:30 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:35:19 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	execute_unset(t_execution *exec)
 {
 	t_command	*cmd;
-	int		index;
-	t_list	*node;
+	int			index;
+	t_list		*node;
 
 	index = 0;
 	cmd = exec->current->content;
@@ -71,6 +71,7 @@ void	execute_export(t_execution *exec)
 		}
 	}
 }
+
 static t_bool	ft_isnumber(char *str)
 {
 	int	index;

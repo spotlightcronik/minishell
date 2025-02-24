@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:10:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/20 15:52:17 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:22:57 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,8 @@ static void	prepare_outfile(t_command *cmd)
 	}
 }
 
-void	prepare_exec(t_execution *exec)
+void	prepare_exec(t_command *cmd)
 {
-	t_command	*cmd;
-
-	cmd = exec->current->content;
 	if (cmd->infile)
 		prepare_infile(cmd);
 	if (cmd->heredoc)

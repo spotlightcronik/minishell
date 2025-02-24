@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_linked_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 16:31:51 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 19:45:31 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
+
+extern int	global;
 
 int	stll(t_list **list, t_command *arr, int size)
 {
@@ -77,14 +79,14 @@ int	insert_envpar(char **dest, char *add, int place)
 	return (0);
 }
 
-int no_env_copy(t_info *data, int co, char *temp)
+int	no_env_copy(t_info *data, int co, char *temp)
 {
-	int count;
-	int count2;
+	int	count;
+	int	count2;
 
 	count = 0;
 	count2 = 0;
-	while(count < co - 1)
+	while (count < co - 1)
 	{
 		temp[count] = data->str[count];
 		count++;
@@ -94,7 +96,7 @@ int no_env_copy(t_info *data, int co, char *temp)
 	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])
 		|| data->str[count] == '_')
 		count++;
-	if(data->str[count] == ' ')
+	if (data->str[count] == ' ')
 		count++;
 	while (data->str[count] != 0)
 	{
@@ -103,25 +105,25 @@ int no_env_copy(t_info *data, int co, char *temp)
 		count2++;
 	}
 	if ((temp[co - 1] == 34) || temp[co - 1] == 39)
-			set_q(data, temp[co - 1]);
-	return(temp[count2] = 0, free(data->str), data->str = temp, 0);
+		set_q(data, temp[co - 1]);
+	return (temp[count2] = 0, free(data->str), data->str = temp, 0);
 }
 
-int no_env(t_info *data, int co)
+int	no_env(t_info *data, int co)
 {
-	int count;
-	int size;
-	char *temp;
+	int		count;
+	int		size;
+	char	*temp;
 
 	count = 0;
 	size = 0;
-	while(count < co)
+	while (count < co)
 		count++;
 	size = count;
 	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])
 		|| data->str[count] == '_')
 		count++;
-	if(data->str[count] == ' ')
+	if (data->str[count] == ' ')
 		count++;
 	while (data->str[count] != 0)
 	{
@@ -131,7 +133,7 @@ int no_env(t_info *data, int co)
 	temp = malloc(size + 1);
 	if (!temp)
 		return (1);
-	return(no_env_copy(data, co, temp));
+	return (no_env_copy(data, co, temp));
 }
 
 int	ft_getenv_parse(t_info *data, int co, int insert)
@@ -148,6 +150,8 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 	if (!arr)
 		return (1);
 	ft_strlcpy(arr, &data->str[co], count - co + 1);
+	if (ft_strcmp(arr, "$?") == 0)
+		return (free(arr), insert_envpar(&data->str, ft_itoa(global), co - 1));
 	count = 0;
 	temp = ft_lstchr(data->env_param, arr, handler);
 	if (!temp)

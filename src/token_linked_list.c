@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_linked_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 15:57:43 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:31:51 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int no_env(t_info *data, int co)
 	return(no_env_copy(data, co, temp));
 }
 
-int	ft_getenv(t_info *data, int co, int insert)
+int	ft_getenv_parse(t_info *data, int co, int insert)
 {
 	t_list	*temp;
 	char	*arr;

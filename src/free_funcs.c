@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lsttoar.c                                       :+:      :+:    :+:   */
+/*   free_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 17:31:26 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/04 16:04:01 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/02/03 11:33:01 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/02/24 16:32:09 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "execution.h"
 
-void	**ft_lsttoarr(t_list *lst)
+void	free_cmd(void *ptr)
 {
-	void	**value;
-	int		index;
+	int			index;
+	t_command	*cmd;
 
-	if (!lst)
-		return (0);
-	value = ft_calloc(ft_lstsize(lst) + 1, sizeof(void *));
-	if (!value)
-		return (0);
-	index = 0;
-	while (lst)
+	cmd = ptr;
+	if (cmd)
 	{
-		value[index] = lst->content;
-		index++;
-		lst = lst->next;
+		if (cmd->infile)
+			free(cmd->infile);
+		if (cmd->name)
+			free(cmd->name);
+		if (cmd->args)
+		{
+			index = 0;
+			while (cmd->args[index])
+			{
+				free(cmd->args[index]);
+				index++;
+			}
+			free(cmd->args);
+		}
+		if (cmd->output)
+			free(cmd->output);
+		free(cmd);
 	}
-	return (value);
 }

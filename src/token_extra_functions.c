@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_extra_functions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:26:41 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 14:05:15 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:31:42 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	word_len(t_info *data)
 			|| ((data->str[pos] == 34 || data->str[pos] == 39)
 				&& data->str[pos] != data->q.type && data->q.passed != 0))
 			count++;
-		if (data->str[pos] == '$' && data->q.type != 39 && ft_getenv(data, pos
+		if (data->str[pos] == '$' && data->q.type != 39 && ft_getenv_parse(data, pos
 				+ 1, 1) != 0 && pos++ > -1)
 			return (0);
 		pos++;

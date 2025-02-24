@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   a_minishell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 15:47:02 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:31:08 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef A_MINISHELL
 # define A_MINISHELL
-# include "inc/t_command.h"
-# include "lib/libft/inc/ft_printf_int.h"
-# include "lib/libft/inc/libft.h"
+# include "t_command.h"
+# include "libft.h"
+# include "execution.h"
 # include "structs.h"
 # include <dirent.h>
 # include <errno.h>
@@ -39,7 +39,7 @@ int		create_token(t_info *data, char *simbol, char *name);
 int		tokenize(t_info *data);
 int		stll(t_list **list, t_command *arr, int size);
 int		dtll(t_list **list, char **arr);
-int		ft_getenv(t_info *data, int co, int insert);
+int		ft_getenv_parse(t_info *data, int co, int insert);
 int		dollar_sign(t_info *data);
 int		word_len(t_info *data);
 int		is_partofword(char c);

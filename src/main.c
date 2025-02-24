@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 16:11:51 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:29:27 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ int	main(int ac, char **av, char **ip)
 		{
 			data.count = 0;
 			if (parser(&data) == 0)
-				data.count = 0;
-			print_result(&data);
+				execute_line(data.action_list, data.env_param);
 			clenup_parser(&data);
 			init_data(&data, ac, av, ip);
 		}

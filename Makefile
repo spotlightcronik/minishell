@@ -1,23 +1,49 @@
 NAME = minishell
-NAME_BONUS = checker
-CFLAGS = -g -Wall -Wextra -Werror
-SOURCES = main.c clenup.c token_extra_functions.c token_linked_list.c \
-	token_to_list.c token.c parser_add.c parser_extra.c \
-	parser.c
-LIB = lib/libft/libft.a
-OBJ = $(SOURCES:.c=.o)
 
-all: library $(NAME)
+CFLAGS	=	-g -Wall -Wextra -Werror
+FILES	=	main.c \
+			clenup.c \
+			token_extra_functions.c \
+			token_linked_list.c \
+			token_to_list.c \
+			token.c \
+			parser_add.c \
+			parser_extra.c \
+			parser.c	\
+			bi_action.c \
+			bi_cd.c \
+			bi_print.c \
+			envp_utils.c \
+			execute_builtin.c \
+			execute_cmd.c \
+			execute_routing.c \
+			free_funcs.c \
+			ft_fork.c \
+			prepare_exec.c 
+
+SOURCES		:=	$(addprefix src/, $(FILES))
+OBJ			:=	$(addprefix obj/, $(FILES:.c=.o))
+
+LIBFT_DIR	:=	./lib/libft
+LIB = $(LIBFT_DIR)/libft.a
+
+INCS		:=	-I ./inc \
+				-I $(LIBFT_DIR)/inc
+
+all: library  $(NAME)
+
+obj:
+	mkdir -p obj
 
 library:
 	@cd lib/libft && $(MAKE)
 
-$(NAME): $(OBJ)
+$(NAME): obj $(OBJ)
 	cc $(CFLAGS) $(OBJ) -lreadline $(LIB) -o $(NAME) $(LDFLAGS)
 
 
-%.o: %.c
-	gcc -c $< $(CFLAGS) -Ilibft
+obj/%.o: src/%.c
+	gcc $(INCS) -c $< $(CFLAGS) -Ilibft -o $@
 
 clean:
 	rm -f $(OBJ)

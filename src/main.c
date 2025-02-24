@@ -6,11 +6,13 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 18:25:01 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 18:28:30 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
+
+int global = 0;
 
 int	init_data(t_info *data, int ac, char **av, char **ip)
 {

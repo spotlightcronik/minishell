@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:38:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/21 18:22:44 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:04:23 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,21 @@ void	execute_cmd(t_execution *exec)
 
 	prepare_exec(exec->current->content);
 	cmd_path = get_cmd_path(exec->current->content, exec->envp);
+	if (!cmd_path)
+	{
+		perror("Command not found");
+		exit(1);
+	}
+	else if (access(cmd_path, X_OK) == -1)
+	{
+		perror("Permission denied");
+		exit(2);
+	}
 	args = prepare_args(exec->current->content);
 	envp = (char **)ft_lsttoarr(exec->envp);
 	if (execve(cmd_path, args, envp) == -1)
 	{
-		if (!cmd_path)
-			perror("Command not found");
-		else if (access(cmd_path, X_OK) == -1)
-			perror("Permission denied");
+		perror("execve failed");
+		exit(3);
 	}
 }

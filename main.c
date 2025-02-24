@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/22 16:37:59 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:11:51 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	init_data(t_info *data, int ac, char **av, char **ip)
 }
 void	print_result(t_info *data)
 {
-	int count2;
-	t_list *next;
-	t_command *temp;
+	int			count2;
+	t_list		*next;
+	t_command	*temp;
 
 	next = data->action_list;
 	printf("\n");
-	while(next != NULL)
+	while (next != NULL)
 	{
 		temp = (t_command *)next->content;
 		printf("Heredoc: %s\n", temp->heredoc);
@@ -77,6 +77,7 @@ int	main(int ac, char **av, char **ip)
 			if (parser(&data) == 0)
 				data.count = 0;
 			print_result(&data);
+			clenup_parser(&data);
 			init_data(&data, ac, av, ip);
 		}
 	}

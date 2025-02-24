@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/22 16:20:05 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:47:02 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ int		add_redir(t_info *data, int r);
 int		add_heredoc(t_info *data);
 int		add_word(t_info *data, char *word);
 void	set_q(t_info *data, char c);
+int		clenup_parser(t_info *data);
 #endif

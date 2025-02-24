@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:06:20 by jeperez-          #+#    #+#             */
-/*   Updated: 2024/10/25 10:05:08 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:58:20 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*value;
 
+	if (!content)
+		return (NULL);
 	value = ft_calloc(1, sizeof(t_list));
 	if (!value)
-		return (0);
+		return (NULL);
 	value->content = content;
 	value->prev = 0;
 	value->next = 0;

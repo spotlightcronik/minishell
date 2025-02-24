@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:16:26 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/22 16:37:15 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:20:43 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	add_comand(t_info *data)
 	command = malloc(sizeof(t_command));
 	if (!command)
 		return (1);
-	new = malloc(sizeof(t_list));
+	new = ft_lstnew(command);
 	if (!new)
 		return (free(command), 1);
 	command->name = NULL;
@@ -29,7 +29,6 @@ int	add_comand(t_info *data)
 	command->heredoc = NULL;
 	command->infile = NULL;
 	command->output = NULL;
-	new->content = (void *)command;
 	ft_lstadd_back(&data->action_list, new);
 	return (0);
 }

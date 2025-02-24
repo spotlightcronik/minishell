@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 14:20:05 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:57:43 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	dtll(t_list **list, char **arr)
 	count = 0;
 	while (arr[count] != NULL)
 	{
-		temp = ft_lstnew((void *)arr[count]);
+		temp = ft_lstnew(ft_strdup(arr[count]));
 		if (!temp)
 			return (1);
 		ft_lstadd_back(list, temp);

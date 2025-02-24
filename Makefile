@@ -1,8 +1,8 @@
 NAME = minishell
 NAME_BONUS = checker
 CFLAGS = -g -Wall -Wextra -Werror
-SOURCES = main.c token_clenup.c token_extra_functions.c token_linked_list.c \
-	token_to_list.c token.c parser_add.c parser_clenup.c parser_extra.c \
+SOURCES = main.c clenup.c token_extra_functions.c token_linked_list.c \
+	token_to_list.c token.c parser_add.c parser_extra.c \
 	parser.c
 LIB = lib/libft/libft.a
 OBJ = $(SOURCES:.c=.o)

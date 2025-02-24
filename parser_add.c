@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:09:05 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/21 17:47:15 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:01:16 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	add_word(t_info *data, char *word)
 		if (!add->name)
 			return(1);
 	}
-	data->count++;
-	return (0);
+	return (data->count++ ,0);
 }
 
 int	add_heredoc(t_info *data)

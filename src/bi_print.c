@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:04:35 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/21 11:17:00 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:19:03 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,20 @@ void	execute_echo(t_execution *exec)
 	int			nl;
 
 	cmd = exec->current->content;
-	if (ft_strcmp(cmd->name, "echo"))
-		return ;
-	index = -1;
+	index = 0;
 	nl = 1;
 	if (cmd->args)
 	{
-		if (!ft_strcmp(cmd->args[++index], "-n"))
+		if (!ft_strcmp(cmd->args[index], "-n"))
 		{
 			index++;
 			nl = 0;
 		}
-		while (cmd->args[++index])
+		while (cmd->args[index])
 		{
 			printf("%s", cmd->args[index]);
-			if (cmd->args[index + 1])
+			index++;
+			if (cmd->args[index])
 				printf(" ");
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 16:29:27 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:41:25 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,24 @@ int	main(int ac, char **av, char **ip)
 {
 	t_info	data;
 
-	if (init_data(&data, ac, av, ip) != 0)
-		return (clenup(&data));
 	while (1)
 	{
+		if (init_data(&data, ac, av, ip) != 0)
+		ºreturn (clenup(&data));
 		data.str = readline("prompt > ");
 		if (!data.str)
 			perror("read line");
 		if (tokenize(&data) != 0 || data.token_list_size == 0)
-		{
 			clenup(&data);
-			init_data(&data, ac, av, ip);
-		}
 		else
 		{
 			data.count = 0;
-			if (parser(&data) == 0)
+			if (parser(&data) == 0 )
+			{
+				clenup(&data);
 				execute_line(data.action_list, data.env_param);
+			}
 			clenup_parser(&data);
-			init_data(&data, ac, av, ip);
 		}
 	}
 	return (0);

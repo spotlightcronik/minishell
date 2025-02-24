@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clenup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 16:37:13 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:41:43 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	clenup(t_info *data)
 		free(data->token_list[count].type);
 		count++;
 	}
-	ft_lstclear(&data->env_param, free);
 	free(data->token_list);
 	free(data->str);
 	data->token_list_size = 0;
@@ -64,7 +63,6 @@ int	clenup(t_info *data)
 
 int clenup_parser(t_info *data)
 {
-	clenup(data);
 	ft_lstclear(&data->action_list, del_w_commands);
 	return(1);
 }

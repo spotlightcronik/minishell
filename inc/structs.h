@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:59:36 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/05 17:42:46 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 18:01:07 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ typedef struct s_info
 	t_list		*env_param;
 	t_list		*action_list;
 	int			dollar_signs;
+	int			initialize;
 }				t_info;

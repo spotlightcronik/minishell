@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:09:05 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 16:54:37 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 17:54:59 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	add_word(t_info *data, char *word)
 	{
 		add->args = ft_realoc(add->args);
 		if (add->args == NULL)
-			return (1);
+			return (perror("Failed to realocate args"), 1);
 		while (add->args[count] != NULL)
 			count++;
 		add->args[count] = ft_strdup(word);
@@ -34,7 +34,7 @@ int	add_word(t_info *data, char *word)
 	{
 		add->name = ft_strdup(word);
 		if (!add->name)
-			return(1);
+			return(perror("Failed to copy name"),1);
 	}
 	return (data->count++ ,0);
 }
@@ -47,14 +47,14 @@ int	add_heredoc(t_info *data)
 	temp = ft_lstlast(data->action_list);
 	add = (t_command *)temp->content;
 	if (add->heredoc != NULL)
-		return (1);
+		return (perror("Failed to allocate heredoc"), 1);
 	if (add->args != NULL && ft_strcmp(data->token_list[data->count + 1].type,
 			"word") != 0)
-		return (1);
+		return (perror("Sintax error not word after heredoc"), 1);
 	data->count++;
 	add->heredoc = ft_strdup(data->token_list[data->count].content);
 	if (!add->heredoc)
-		return (1);
+		return (perror("Failed to allocate heredoc"), 1);
 	data->count++;
 	return (0);
 }
@@ -67,7 +67,7 @@ int add_redir(t_info *data, int r)
 	temp = ft_lstlast(data->action_list);
 	add = (t_command *)temp->content;
 	if (add->heredoc != NULL)
-		return (1);
+		return (perror("Failed to find content"), 1);
 	if (add->args != NULL && ft_strcmp(data->token_list[data->count + 1].type,
 			"word") != 0)
 		return (1);

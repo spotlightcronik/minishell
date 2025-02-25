@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:41:40 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:49:03 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:53:29 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	execute_printbi(t_execution *exec, t_fd in, t_fd out)
 	dup2(in, STDIN_FILENO);
 	if (in != STDIN_FILENO)
 		close(in);
-	prev[1] = dup(STDIN_FILENO);
+	prev[1] = dup(STDOUT_FILENO);
+	dup2(in, STDOUT_FILENO);
 	if (out != STDOUT_FILENO)
 		close(out);
 	if (!ft_strcmp(cmd->name, "echo"))

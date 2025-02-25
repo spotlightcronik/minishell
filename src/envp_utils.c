@@ -6,13 +6,13 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:18:45 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 14:28:01 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:00:28 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static int	handler(void *s1, void *s2)
+static int	handler_envp(void *s1, void *s2)
 {
 	return (ft_strncmp(s1, s2, ft_strlen(s2)));
 }
@@ -25,7 +25,7 @@ t_list	*ft_envp_node(t_list *envp, char *env_name)
 	placeholder = ft_strjoin(env_name, "=");
 	if (!placeholder)
 		return (NULL);
-	node = ft_lstchr(envp, placeholder, handler);
+	node = ft_lstchr(envp, placeholder, handler_envp);
 	free(placeholder);
 	return (node);
 }

@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 14:40:47 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:09:49 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int	insert_global(char **dest, char *add, int place)
 	}
 	new[count] = 0;
 	ft_strlcat(new, add, ft_strlen((*dest)) + ft_strlen(add));
-	count++;
-	count++;
+	count += 2;
 	ft_strlcat(new, &(*dest)[count], ft_strlen((*dest)) + ft_strlen(add) + 1);
 	free(*dest);
 	*dest = new;
@@ -102,9 +101,6 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 	if (!arr)
 		return (1);
 	ft_strlcpy(arr, &data->str[co], count - co + 1);
-	if (ft_strcmp(arr, "$?") == 0)
-		return (free(arr), insert_envpar(&data->str, ft_itoa(g_global), co
-				- 1));
 	count = 0;
 	temp = ft_lstchr(data->env_param, arr, handler);
 	if (!temp)

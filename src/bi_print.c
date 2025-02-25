@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:04:35 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:44:24 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:54:58 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	execute_echo(t_execution *exec)
 	int			index;
 	int			nl;
 
+	prepare_exec(exec->current->content);
 	cmd = exec->current->content;
 	index = 0;
 	nl = 1;

@@ -6,13 +6,11 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 11:47:13 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:02:04 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
-
-int g_global = 0;
 
 int	init_data(t_info *data, int ac, char **av, char **ip)
 {
@@ -25,8 +23,9 @@ int	init_data(t_info *data, int ac, char **av, char **ip)
 	data->q.passed = 0;
 	data->dollar_signs = 0;
 	data->action_list = NULL;
-	if(data->initialize == 0)
+	if (data->initialize == 0)
 	{
+		g_global = 0;
 		data->env_param = NULL;
 		if (dtll(&data->env_param, ip) != 0)
 			return (1);
@@ -75,14 +74,14 @@ int	main(int ac, char **av, char **ip)
 			return (clenup(&data));
 		data.str = readline("prompt > ");
 		if (!data.str)
-			return(printf("Exit"), clenup(&data));
+			return (printf("Exit"), clenup(&data));
 		add_history(data.str);
 		if (tokenize(&data) != 0 || data.token_list_size == 0)
 			clenup(&data);
 		else
 		{
 			data.count = 0;
-			if (parser(&data) == 0 )
+			if (parser(&data) == 0)
 			{
 				clenup(&data);
 				execute_line(data.action_list, data.env_param);

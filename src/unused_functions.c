@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   unused_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 11:41:36 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/20 10:32:20 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 11:54:10 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
 
+// Jesus: Por que esta este archivo?

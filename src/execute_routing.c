@@ -6,13 +6,11 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:47:13 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:01:34 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-extern int g_global;
 
 static void	multiple_cmd(t_execution *exec)
 {
@@ -64,5 +62,5 @@ void	execute_line(t_list *lst, t_list *envp)
 		return ;
 	waitpid(exec.pid, &wstatus, 0);
 	if (WIFEXITED(wstatus))
-		g_global = WEXITSTATUS(wstatus); 
+		g_global = WEXITSTATUS(wstatus);
 }

@@ -6,13 +6,11 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 11:47:13 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:01:37 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
-
-extern int	g_global;
 
 int	stll(t_list **list, t_command *arr, int size)
 {

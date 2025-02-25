@@ -6,13 +6,11 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:02 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:47:13 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:01:31 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-extern int g_global;
 
 void	execute_unset(t_execution *exec)
 {

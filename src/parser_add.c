@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:09:05 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 17:54:59 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 11:56:31 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	add_word(t_info *data, char *word)
 	{
 		add->name = ft_strdup(word);
 		if (!add->name)
-			return(perror("Failed to copy name"),1);
+			return (perror("Failed to copy name"), 1);
 	}
-	return (data->count++ ,0);
+	return (data->count++, 0);
 }
 
 int	add_heredoc(t_info *data)
@@ -59,7 +59,7 @@ int	add_heredoc(t_info *data)
 	return (0);
 }
 
-int add_redir(t_info *data, int r)
+int	add_redir(t_info *data, int r)
 {
 	t_list		*temp;
 	t_command	*add;
@@ -81,7 +81,7 @@ int add_redir(t_info *data, int r)
 	return (0);
 }
 
-int add_input(t_info *data)
+int	add_input(t_info *data)
 {
 	t_list		*temp;
 	t_command	*add;
@@ -100,4 +100,3 @@ int add_input(t_info *data)
 	data->count++;
 	return (0);
 }
-

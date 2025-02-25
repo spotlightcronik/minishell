@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_to_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:56:41 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/04 17:05:28 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 11:54:43 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,17 @@ int	add_token(t_info *data, t_token tk)
 	return (0);
 }
 
-int create_token(t_info *data, char *simbol, char *name)
+int	create_token(t_info *data, char *simbol, char *name)
 {
-	t_token add;
+	t_token	add;
 
 	add.content = ft_strdup(simbol);
 	if (!add.content)
-		return(1);
+		return (1);
 	add.type = ft_strdup(name);
-	if(!add.type)
-		return(1);
-	if(add_token(data, add) != 0)
-		return(1);
-	return(0);
+	if (!add.type)
+		return (1);
+	if (add_token(data, add) != 0)
+		return (1);
+	return (0);
 }
-
-

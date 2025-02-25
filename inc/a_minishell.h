@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 11:49:35 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:01:14 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include <termios.h>
 # include <ttyent.h>
 # include <unistd.h>
+
+extern int	g_global;
 
 int		clenup(t_info *data);
 int		create_token(t_info *data, char *simbol, char *name);

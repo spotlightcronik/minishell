@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 12:57:50 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:24:18 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,27 @@
 
 extern int	g_global;
 
-int		clenup(t_info *data);
-int		create_token(t_info *data, char *simbol, char *name);
-int		tokenize(t_info *data);
-int		stll(t_list **list, t_command *arr, int size);
-int		dtll(t_list **list, char **arr);
-int		ft_getenv_parse(t_info *data, int co, int insert);
-int		dollar_sign(t_info *data);
-int		word_len(t_info *data);
-int		is_partofword(char c);
-void	copy_word(t_info *data, char *new, int count);
-char	**ft_realoc(char **temp);
-int		add_word(t_info *data, char *word);
-int		parser(t_info *data);
-int		add_input(t_info *data);
-int		add_redir(t_info *data, int r);
-int		add_heredoc(t_info *data);
-int		add_word(t_info *data, char *word);
-void	set_q(t_info *data, char c);
-int		clenup_parser(t_info *data);
-void	init_signals(void);
+int			clenup(t_info *data);
+int			create_token(t_info *data, char *simbol, char *name);
+int			tokenize(t_info *data);
+int			dtll(t_list **list, char **arr);
+int			ft_getenv_parse(t_info *data, int co, int insert);
+int			dollar_sign(t_info *data);
+int			word_len(t_info *data);
+int			is_partofword(char c);
+void		copy_word(t_info *data, char *new, int count);
+char		**ft_realoc(char **temp);
+int			add_word(t_info *data, char *word);
+int			parser(t_info *data);
+int			add_input(t_info *data);
+int			add_redir(t_info *data, int r);
+int			add_heredoc(t_info *data);
+int			add_word(t_info *data, char *word);
+void		set_q(t_info *data, char c);
+int			clenup_parser(t_info *data);
+void		init_signals(void);
+int			handler(void *str, void *reference);
+int			no_env(t_info *data, int co);
+void		no_env_copy_morelines(t_info *data, int count, int count2,
+				char *temp);
 #endif

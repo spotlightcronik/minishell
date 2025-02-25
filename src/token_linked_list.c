@@ -6,52 +6,13 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 12:56:28 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:23:09 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
 
 extern int	g_global;
-
-int	stll(t_list **list, t_command *arr, int size)
-{
-	int		count;
-	t_list	*temp;
-
-	count = 0;
-	while (count < size)
-	{
-		temp = ft_lstnew((void *)&arr[count]);
-		if (!temp)
-			return (1);
-		ft_lstadd_back(list, temp);
-		count++;
-	}
-	return (0);
-}
-
-int	dtll(t_list **list, char **arr)
-{
-	int		count;
-	t_list	*temp;
-
-	count = 0;
-	while (arr[count] != NULL)
-	{
-		temp = ft_lstnew(ft_strdup(arr[count]));
-		if (!temp)
-			return (1);
-		ft_lstadd_back(list, temp);
-		count++;
-	}
-	return (0);
-}
-
-int	handler(void *str, void *reference)
-{
-	return (ft_strncmp(str, reference, ft_strlen(reference)));
-}
 
 int	insert_envpar(char **dest, char *add, int place)
 {
@@ -79,61 +40,14 @@ int	insert_envpar(char **dest, char *add, int place)
 	return (0);
 }
 
-int	no_env_copy(t_info *data, int co, char *temp)
+void	no_env_copy_morelines(t_info *data, int count, int count2, char *temp)
 {
-	int	count;
-	int	count2;
-
-	count = 0;
-	count2 = 0;
-	while (count < co - 1)
-	{
-		temp[count] = data->str[count];
-		count++;
-	}
-	count2 = count;
-	count++;
-	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])
-		|| data->str[count] == '_')
-		count++;
-	if (data->str[count] == ' ')
-		count++;
 	while (data->str[count] != 0)
 	{
 		temp[count2] = data->str[count];
 		count++;
 		count2++;
 	}
-	if ((temp[co - 1] == 34) || temp[co - 1] == 39)
-		set_q(data, temp[co - 1]);
-	return (temp[count2] = 0, free(data->str), data->str = temp, 0);
-}
-
-int	no_env(t_info *data, int co)
-{
-	int		count;
-	int		size;
-	char	*temp;
-
-	count = 0;
-	size = 0;
-	while (count < co)
-		count++;
-	size = count;
-	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])
-		|| data->str[count] == '_')
-		count++;
-	if (data->str[count] == ' ')
-		count++;
-	while (data->str[count] != 0)
-	{
-		count++;
-		size++;
-	}
-	temp = malloc(size + 1);
-	if (!temp)
-		return (1);
-	return (no_env_copy(data, co, temp));
 }
 
 int	insert_global(char **dest, char *add, int place)
@@ -163,6 +77,15 @@ int	insert_global(char **dest, char *add, int place)
 	return (0);
 }
 
+void	getenv_morelines(char *arr, t_list *temp, int *count)
+{
+	free(arr);
+	arr = (char *)temp->content;
+	while (arr[*count] != '=')
+		(*count)++;
+	(*count)++;
+}
+
 int	ft_getenv_parse(t_info *data, int co, int insert)
 {
 	t_list	*temp;
@@ -180,16 +103,13 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 		return (1);
 	ft_strlcpy(arr, &data->str[co], count - co + 1);
 	if (ft_strcmp(arr, "$?") == 0)
-		return (free(arr), insert_envpar(&data->str, ft_itoa(g_global), co - 1));
+		return (free(arr), insert_envpar(&data->str, ft_itoa(g_global), co
+				- 1));
 	count = 0;
 	temp = ft_lstchr(data->env_param, arr, handler);
 	if (!temp)
 		return (no_env(data, co));
-	free(arr);
-	arr = (char *)temp->content;
-	while (arr[count] != '=')
-		count++;
-	count++;
+	getenv_morelines(arr, temp, &count);
 	if (insert == 1)
 		return (insert_envpar(&data->str, &arr[count], co - 1));
 	return (data->count++, create_token(data, &arr[count], "env param"));

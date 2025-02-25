@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 12:58:44 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:01:05 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	g_global;
 
 int	init_data(t_info *data, int ac, char **av, char **ip)
 {
+	using_history();
+	init_signals();
 	(void)av;
 	(void)ac;
 	data->token_list_size = 0;
@@ -68,8 +70,6 @@ int	main(int ac, char **av, char **ip)
 	t_info	data;
 
 	data.initialize = 0;
-	using_history();
-	init_signals();
 	while (1)
 	{
 		if (init_data(&data, ac, av, ip) != 0)

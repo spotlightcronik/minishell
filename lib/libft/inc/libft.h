@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:14:25 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 16:22:14 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:05:06 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ char				*ft_strtrim(char const *s1, char const *set);
 
 /*
 
-	* Creates an array of string from a source string splitting it by the delimiter.
+* Creates an array of string from a source string splitting it by the delimiter.
  * @param[in] s Source string.
  * @param[in] c Delimiter to split the string by.
  * @returns Double pointer to the new set of string

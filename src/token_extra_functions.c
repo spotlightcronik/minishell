@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:26:41 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 19:41:03 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:20:26 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	word_len(t_info *data)
 			|| ((data->str[pos] == 34 || data->str[pos] == 39)
 				&& data->str[pos] != data->q.type && data->q.passed != 0))
 			count++;
-		if (data->str[pos] == '$' && data->q.type != 39 && ft_getenv_parse(data, pos
-				+ 1, 1) != 0 && pos++ > -1)
+		if (data->str[pos] == '$' && data->q.type != 39 && ft_getenv_parse(data,
+				pos + 1, 1) != 0 && pos++ > -1)
 			return (0);
 		pos++;
 	}
@@ -57,6 +57,11 @@ int	is_partofword(char c)
 	if (c == ' ' || c == '|')
 		return (0);
 	return (2);
+}
+
+int	handler(void *str, void *reference)
+{
+	return (ft_strncmp(str, reference, ft_strlen(reference)));
 }
 
 void	copy_word(t_info *data, char *new, int count)

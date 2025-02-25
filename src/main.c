@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 18:28:30 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/24 19:53:41 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int ac, char **av, char **ip)
 	t_info	data;
 
 	data.initialize = 0;
+	using_history();
 	while (1)
 	{
 		if (init_data(&data, ac, av, ip) != 0)
@@ -80,6 +81,7 @@ int	main(int ac, char **av, char **ip)
 			data.count = 0;
 			if (parser(&data) == 0 )
 			{
+				add_history(data.str);
 				clenup(&data);
 				execute_line(data.action_list, data.env_param);
 			}

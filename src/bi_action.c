@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:02 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 17:40:39 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 19:55:17 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	execute_exit(t_execution *exec)
 			ft_lstclear(&exec->cmds, free_cmd);
 		if (exec->envp)
 			ft_lstclear(&exec->envp, free);
+		clear_history();
 		exit(exit_code);
 	}
 }

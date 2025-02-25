@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:04:35 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 14:19:03 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:44:24 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	execute_env(t_execution *exec)
 	node = exec->envp;
 	while (node)
 	{
-		if (node->content && *(ft_strchr((char *)node->content, '=')))
+		if (node->content && ft_strchr((char *)node->content, '='))
 			printf("%s\n", (char *)node->content);
 		node = node->next;
 	}

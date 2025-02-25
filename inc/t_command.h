@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 16:31:30 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:49:19 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_command
 	char	*name;
 	char	**args;
 	char	*output;
-	int	append;
+	int		append;
 }	t_command;
 
 #endif

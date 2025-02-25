@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clenup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 17:41:43 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 11:45:59 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void del(void *arr)
 	return;
 }
 
-void del_w_commands(void *content)
+void del_w_commands(void *content);
 {
 	t_command *del;
 	int count;
@@ -35,10 +35,11 @@ void del_w_commands(void *content)
 		free(del->name);
 	if(del->output)
 		free(del->output);
-	while(del->args && del->args[count] != NULL)
+	if (del->args)
 	{
-		free(del->args[count]);
-		count++;
+		while(del->args && del->args[count] != NULL)
+			free(del->args[count++]);
+		free(del->args);
 	}
 	free(content);
 	return;

@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:59:36 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 18:01:07 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 11:49:26 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "a_minishell.h"
+#ifndef STRUCTS_H
+# define STRUCTS_H
+
+# include "a_minishell.h"
 
 typedef struct s_token
 {
@@ -37,3 +40,5 @@ typedef struct s_info
 	int			dollar_signs;
 	int			initialize;
 }				t_info;
+
+#endif

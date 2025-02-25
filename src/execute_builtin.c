@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:41:40 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/21 11:12:39 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:49:03 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,24 @@
 static void	execute_printbi(t_execution *exec, t_fd in, t_fd out)
 {
 	t_command	*cmd;
+	t_fd		prev[2];
 
 	cmd = exec->current->content;
-	exec->pid = fork();
-	if (!exec->pid)
-	{
-		dup2(in, STDIN_FILENO);
-		if (in != STDIN_FILENO)
-			close(in);
-		dup2(out, STDOUT_FILENO);
-		if (out != STDOUT_FILENO)
-			close(out);
-		if (!ft_strcmp(cmd->name, "echo"))
-			execute_echo(exec);
-		else if (!ft_strcmp(cmd->name, "pwd"))
-			execute_pwd(exec);
-		else if (!ft_strcmp(cmd->name, "env"))
-			execute_env(exec);
-		exit(0);
-	}
+	prev[0] = dup(STDIN_FILENO);
+	dup2(in, STDIN_FILENO);
+	if (in != STDIN_FILENO)
+		close(in);
+	prev[1] = dup(STDIN_FILENO);
+	if (out != STDOUT_FILENO)
+		close(out);
+	if (!ft_strcmp(cmd->name, "echo"))
+		execute_echo(exec);
+	else if (!ft_strcmp(cmd->name, "pwd"))
+		execute_pwd(exec);
+	else if (!ft_strcmp(cmd->name, "env"))
+		execute_env(exec);
+	dup2(prev[0], STDIN_FILENO);
+	dup2(prev[1], STDIN_FILENO);
 }
 
 static void	execute_actionbi(t_execution *exec)

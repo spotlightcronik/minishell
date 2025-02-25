@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_extra.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:03:28 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/20 14:05:12 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 11:30:24 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,17 @@ char **ft_realoc(char **temp)
 	char **new;
 
 	count = 0;
-	while(temp != NULL && temp[count] != NULL)
-		count++;
-	new = malloc((count + 2) * sizeof(char *));
+	if (temp != NULL)
+		while(temp[count] != NULL)
+			count++;
+	new = ft_calloc((count + 2), sizeof(char *));
 	if(!new)
 		return(NULL);
 	if(temp == NULL)
-		return(new[count] = NULL, new[count + 1] = NULL, new);
-	count = 0;
-	while (temp[count] != NULL)
-	{
-		new[count] = temp[count];
-		count++;
-	}
+		return(new);
+	ft_memcpy(new, temp, count * sizeof(char *));
 	free(temp);
 	new[count] = NULL;
-	count++;
-	new[count] = NULL;
+	new[count + 1] = NULL;
 	return(new);
 }

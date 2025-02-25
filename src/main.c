@@ -6,16 +6,18 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 10:57:06 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:47:13 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
 
-int global = 0;
+int g_global = 0;
 
 int	init_data(t_info *data, int ac, char **av, char **ip)
 {
+	(void)av;
+	(void)ac;
 	data->token_list_size = 0;
 	data->token_list = NULL;
 	data->count = 0;
@@ -28,11 +30,11 @@ int	init_data(t_info *data, int ac, char **av, char **ip)
 		data->env_param = NULL;
 		if (dtll(&data->env_param, ip) != 0)
 			return (1);
+		data->initialize = 1;
 	}
-	(void)av;
-	(void)ac;
 	return (0);
 }
+
 void	print_result(t_info *data)
 {
 	int			count2;
@@ -71,7 +73,6 @@ int	main(int ac, char **av, char **ip)
 	{
 		if (init_data(&data, ac, av, ip) != 0)
 			return (clenup(&data));
-		data.initialize = 1;
 		data.str = readline("prompt > ");
 		if (!data.str)
 			return(printf("Exit"), clenup(&data));

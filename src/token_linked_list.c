@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_linked_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 19:45:31 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 11:47:13 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
 
-extern int	global;
+extern int	g_global;
 
 int	stll(t_list **list, t_command *arr, int size)
 {
@@ -151,7 +151,7 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 		return (1);
 	ft_strlcpy(arr, &data->str[co], count - co + 1);
 	if (ft_strcmp(arr, "$?") == 0)
-		return (free(arr), insert_envpar(&data->str, ft_itoa(global), co - 1));
+		return (free(arr), insert_envpar(&data->str, ft_itoa(g_global), co - 1));
 	count = 0;
 	temp = ft_lstchr(data->env_param, arr, handler);
 	if (!temp)

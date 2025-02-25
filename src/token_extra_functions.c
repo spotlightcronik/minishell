@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_extra_functions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:26:41 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 16:31:42 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 19:41:03 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

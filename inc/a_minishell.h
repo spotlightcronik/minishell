@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   a_minishell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 16:31:08 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/24 19:05:35 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef A_MINISHELL
 # define A_MINISHELL
-# include "t_command.h"
-# include "libft.h"
 # include "execution.h"
+# include "libft.h"
 # include "structs.h"
+# include "t_command.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -53,4 +53,5 @@ int		add_heredoc(t_info *data);
 int		add_word(t_info *data, char *word);
 void	set_q(t_info *data, char c);
 int		clenup_parser(t_info *data);
+void	init_signals(void);
 #endif

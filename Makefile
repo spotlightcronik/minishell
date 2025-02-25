@@ -19,7 +19,8 @@ FILES	=	main.c \
 			execute_routing.c \
 			free_funcs.c \
 			ft_fork.c \
-			prepare_exec.c 
+			prepare_exec.c \
+			signals.c
 
 SOURCES		:=	$(addprefix src/, $(FILES))
 OBJ			:=	$(addprefix obj/, $(FILES:.c=.o))

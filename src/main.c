@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 19:53:41 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:49:58 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int ac, char **av, char **ip)
 
 	data.initialize = 0;
 	using_history();
+	init_signals();
 	while (1)
 	{
 		if (init_data(&data, ac, av, ip) != 0)
@@ -73,7 +74,7 @@ int	main(int ac, char **av, char **ip)
 		data.initialize = 1;
 		data.str = readline("prompt > ");
 		if (!data.str)
-			perror("read line");
+			return(printf("Exit"), clenup(&data));
 		if (tokenize(&data) != 0 || data.token_list_size == 0)
 			clenup(&data);
 		else

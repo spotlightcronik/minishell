@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:10:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/25 15:46:34 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:10:04 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	heredoc_child(char *delim)
 			free(line);
 			break ;
 		}
-			ft_putstr_fd(line, STDOUT_FILENO);
+		ft_putstr_fd(line, STDOUT_FILENO);
 		free(line);
 		line = get_next_line(STDIN_FILENO);
 	}

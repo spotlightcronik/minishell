@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:52:09 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/22 14:51:52 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 11:58:51 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	token_word(t_info *data)
 		return (1);
 	copy_word(data, new, count + 1);
 	if (ft_strlen(new) == 0)
-		return(0);
+		return (0);
 	return (create_token(data, new, "word"), free(new), 0);
 }
 

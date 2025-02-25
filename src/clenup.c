@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 12:41:05 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 12:54:53 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ void	del_w_commands(void *content)
 		free(del->name);
 	if (del->output)
 		free(del->output);
-	while (del->args && del->args[count] != NULL)
+	if (del->args)
 	{
-		free(del->args[count]);
-		count++;
+		while (del->args && del->args[count] != NULL)
+			free(del->args[count++]);
+		free(del->args);
 	}
 	free(content);
 	return ;

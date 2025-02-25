@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:38:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 18:24:00 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:11:17 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	execute_cmd(t_execution *exec)
 	cmd_path = get_cmd_path(exec->current->content, exec->envp);
 	if (!cmd_path)
 	{
+		ft_lstclear(&exec->envp, free);
+		ft_lstclear(&exec->cmds, free_cmd);
 		perror("Command not found");
 		exit(127);
 	}

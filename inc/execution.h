@@ -6,13 +6,14 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/21 18:23:06 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:02:35 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
+# include "a_minishell.h"
 # include "t_command.h"
 # include "libft.h"
 # include <stdlib.h>
@@ -21,6 +22,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <readline/history.h>
 
 typedef int		t_fd;
 typedef t_fd	t_pipe[2];

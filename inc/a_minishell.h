@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   a_minishell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/24 19:05:35 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 12:01:14 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef A_MINISHELL
-# define A_MINISHELL
+#ifndef A_MINISHELL_H
+# define A_MINISHELL_H
+
 # include "execution.h"
 # include "libft.h"
 # include "structs.h"
@@ -33,6 +34,8 @@
 # include <termios.h>
 # include <ttyent.h>
 # include <unistd.h>
+
+extern int	g_global;
 
 int		clenup(t_info *data);
 int		create_token(t_info *data, char *simbol, char *name);

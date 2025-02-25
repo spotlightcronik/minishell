@@ -6,13 +6,30 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 12:48:59 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/25 12:51:01 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
 
 extern int	global;
+
+int	stll(t_list **list, t_command *arr, int size)
+{
+	int		count;
+	t_list	*temp;
+
+	count = 0;
+	while (count < size)
+	{
+		temp = ft_lstnew((void *)&arr[count]);
+		if (!temp)
+			return (1);
+		ft_lstadd_back(list, temp);
+		count++;
+	}
+	return (0);
+}
 
 int	dtll(t_list **list, char **arr)
 {
@@ -162,6 +179,8 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 	if (!arr)
 		return (1);
 	ft_strlcpy(arr, &data->str[co], count - co + 1);
+	if (ft_strcmp(arr, "$?") == 0)
+		return (free(arr), insert_envpar(&data->str, ft_itoa(global), co - 1));
 	count = 0;
 	temp = ft_lstchr(data->env_param, arr, handler);
 	if (!temp)

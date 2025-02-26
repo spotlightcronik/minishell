@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:52:09 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 11:58:51 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:09:41 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int	token_word(t_info *data)
 	if (!is_partofword(data->str[data->count]))
 		return (0);
 	count = word_len(data);
-	if (count == 0)
-		return (1);
 	if (data->q.passed == 1)
 		return (printf("Error: unclosed quotes\n"), 1);
 	new = malloc((count + 1) * sizeof(char));

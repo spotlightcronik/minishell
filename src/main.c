@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 16:09:53 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/26 11:42:27 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	init_data(t_info *data, int ac, char **av, char **ip)
 	}
 	return (0);
 }
- 
+
 int	main(int ac, char **av, char **ip)
 {
 	t_info	data;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_linked_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 15:09:49 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:01:08 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	no_env_copy_morelines(t_info *data, int count, int count2, char *temp)
 		count++;
 		count2++;
 	}
+	temp[count2] = 0;
 }
 
 int	insert_global(char **dest, char *add, int place)
@@ -76,13 +77,14 @@ int	insert_global(char **dest, char *add, int place)
 	return (0);
 }
 
-void	getenv_morelines(char *arr, t_list *temp, int *count)
+char	*getenv_morelines(char *arr, t_list *temp, int *count)
 {
 	free(arr);
 	arr = (char *)temp->content;
 	while (arr[*count] != '=')
 		(*count)++;
 	(*count)++;
+	return(arr);
 }
 
 int	ft_getenv_parse(t_info *data, int co, int insert)
@@ -105,7 +107,7 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 	temp = ft_lstchr(data->env_param, arr, handler);
 	if (!temp)
 		return (no_env(data, co));
-	getenv_morelines(arr, temp, &count);
+	arr = getenv_morelines(arr, temp, &count);
 	if (insert == 1)
 		return (insert_envpar(&data->str, &arr[count], co - 1));
 	return (data->count++, create_token(data, &arr[count], "env param"));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_extra_functions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:26:41 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 15:02:25 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:05:47 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ int	word_len(t_info *data)
 
 	count = 0;
 	pos = data->count;
-	while (is_partofword(data->str[pos]) || data->q.passed == 1)
+	while ((is_partofword(data->str[pos]) || data->q.passed == 1)
+		&& data->str[pos] != 0)
 	{
 		if ((data->str[pos] == 34) || data->str[pos] == 39)
 			set_q(data, data->str[pos]);
 		if ((data->str[pos] != 34 && data->str[pos] != 39)
-			|| (data->str[pos] != data->q.type && data->q.passed != 0))
+			|| ((data->str[data->count] == 34 || data->str[data->count] == 39)
+				&& data->str[pos] != data->q.type && data->q.passed != 0))
 			count++;
 		if (data->str[pos] == '$' && data->q.type != 39 && ft_getenv_parse(data,
-				pos + 1, 1) != 0 && pos++ > -1)
+				pos + 1, 1) != 0)
 			return (0);
 		pos++;
 	}

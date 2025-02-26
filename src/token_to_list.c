@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:56:41 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 14:24:37 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/26 12:08:33 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ int	no_env_copy(t_info *data, int co, char *temp)
 	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])
 		|| data->str[count] == '_')
 		count++;
-	if (data->str[count] == ' ')
-		count++;
+/* 	if (data->str[count] == ' ')
+		count++; */
 	no_env_copy_morelines(data, count, count2, temp);
 	if ((temp[co - 1] == 34) || temp[co - 1] == 39)
 		set_q(data, temp[co - 1]);
-	return (temp[count2] = 0, free(data->str), data->str = temp, 0);
+	return (free(data->str), data->str = temp, 0);
 }
 
 int	no_env(t_info *data, int co)
@@ -105,8 +105,8 @@ int	no_env(t_info *data, int co)
 	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])
 		|| data->str[count] == '_')
 		count++;
-	if (data->str[count] == ' ')
-		count++;
+/* 	if (data->str[count] == ' ')
+		count++; */
 	while (data->str[count] != 0)
 	{
 		count++;

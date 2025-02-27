@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   bi_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 19:00:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 12:00:09 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/02/27 18:12:29 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/02/27 18:38:59 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "a_minishell.h"
+#include "execution.h"
 
-void	handle_sigint(int sig)
+void	execute_pwd(t_execution *exec)
 {
-	(void)sig;
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	char	*pwd;
 
-void	handle_sigquit(int sig)
-{
-	(void)sig;
-}
-
-void	init_signals(void)
-{
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	if (execute_redirs(exec->current->content) == -1)
+	{
+		g_global = 1;
+		return ;
+	}
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+	{
+		g_global = 2;
+		return ;
+	}
+	printf("%s\n", pwd);
+	free(pwd);
+	g_global = 0;
 }

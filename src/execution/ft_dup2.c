@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_funcs.c                                       :+:      :+:    :+:   */
+/*   ft_dup2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 11:33:01 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 16:32:09 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/02/27 16:07:33 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/02/27 17:38:43 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-void	free_cmd(void *ptr)
+t_fd	ft_dup2(t_fd oldfd, t_fd newfd)
 {
-	int			index;
-	t_command	*cmd;
+	t_fd	ret;
 
-	cmd = ptr;
-	if (cmd)
+	ret = dup2(oldfd, newfd);
+	if (ret == -1)
+		ft_fprintf(2, "minishell: dup2 failed\n");
+	else
 	{
-		if (cmd->infile)
-			free(cmd->infile);
-		if (cmd->name)
-			free(cmd->name);
-		if (cmd->args)
-		{
-			index = 0;
-			while (cmd->args[index])
-			{
-				free(cmd->args[index]);
-				index++;
-			}
-			free(cmd->args);
-		}
-		if (cmd->output)
-			free(cmd->output);
-		free(cmd);
+		if (oldfd != newfd)
+			close(oldfd);
 	}
+	return (ret);
 }

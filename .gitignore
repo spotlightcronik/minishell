@@ -6,6 +6,7 @@
 !lib
 !lib/*
 !src
-!src/*
+!src/execution
+!src/execution/*
 src/execution_parser.c
 !Makefile

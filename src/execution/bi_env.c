@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_extra.c                                     :+:      :+:    :+:   */
+/*   bi_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 14:03:28 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 11:53:21 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/01/29 12:04:35 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/02/27 18:12:21 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "a_minishell.h"
+#include "execution.h"
 
-char	**ft_realoc(char **temp)
+void	execute_env(t_execution *exec)
 {
-	int		count;
-	char	**new;
+	t_list	*node;
 
-	count = 0;
-	if (temp != NULL)
-		while (temp[count] != NULL)
-			count++;
-	new = ft_calloc((count + 2), sizeof(char *));
-	if (!new)
-		return (NULL);
-	if (temp == NULL)
-		return (new);
-	ft_memcpy(new, temp, count * sizeof(char *));
-	free(temp);
-	new[count] = NULL;
-	new[count + 1] = NULL;
-	return (new);
+	execute_redirs(exec->current->content);
+	node = exec->envp;
+	while (node)
+	{
+		if (node->content && ft_strchr((char *)node->content, '='))
+			printf("%s\n", (char *)node->content);
+		node = node->next;
+	}
 }

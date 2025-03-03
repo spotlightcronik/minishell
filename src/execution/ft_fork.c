@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:11:39 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 15:44:49 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:28:51 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	ft_fork(t_execution *exec, t_fd in, t_fd out)
 	t_command	*cmd;
 
 	cmd = exec->current->content;
+	exec->pid = 0;
 	if (!is_builtin(cmd->name))
 	{
 		exec->pid = fork();

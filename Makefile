@@ -1,26 +1,24 @@
 NAME = minishell
 
 CFLAGS	=	-g -Wall -Wextra -Werror
-FILES	=	main.c \
-			clenup.c \
-			token_extra_functions.c \
-			token_linked_list.c \
-			token_to_list.c \
-			token.c \
-			parser_add.c \
-			parser_extra.c \
-			parser.c	\
-			bi_action.c \
-			bi_cd.c \
-			bi_print.c \
-			envp_utils.c \
-			execute_builtin.c \
-			execute_cmd.c \
-			execute_routing.c \
-			free_funcs.c \
-			ft_fork.c \
-			prepare_exec.c \
-			signals.c
+FILES	=	hardcode_parse.c \
+			execution/bi_exit.c \
+			execution/bi_unset.c \
+			execution/bi_export.c \
+			execution/bi_cd.c \
+			execution/bi_pwd.c \
+			execution/bi_env.c \
+			execution/bi_echo.c \
+			execution/envp_utils.c \
+			execution/execute_builtin.c \
+			execution/execute_cmd.c \
+			execution/execute_line.c \
+			execution/free_funcs.c \
+			execution/ft_fork.c \
+			execution/execute_redirs.c \
+			execution/ft_dup2.c \
+			execution/get_cmd_path.c \
+			execution/heredoc_manager.c
 
 SOURCES		:=	$(addprefix src/, $(FILES))
 OBJ			:=	$(addprefix obj/, $(FILES:.c=.o))
@@ -34,7 +32,7 @@ INCS		:=	-I ./inc \
 all: library  $(NAME)
 
 obj:
-	mkdir -p obj
+	mkdir -p obj/execution
 
 library:
 	@cd lib/libft && $(MAKE)

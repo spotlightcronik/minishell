@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_command.h                                        :+:      :+:    :+:   */
+/*   ft_dup2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 13:19:16 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/02/27 16:07:33 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/02/27 17:38:43 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_COMMAND_H
-# define T_COMMAND_H
+#include "execution.h"
 
-# include "structs.h"
-
-typedef struct s_command
+t_fd	ft_dup2(t_fd oldfd, t_fd newfd)
 {
-	t_token	*redir;
-	char	*name;
-	char	**args;
-}	t_command;
+	t_fd	ret;
 
-
-#endif
+	ret = dup2(oldfd, newfd);
+	if (ret == -1)
+		ft_fprintf(2, "minishell: dup2 failed\n");
+	else
+	{
+		if (oldfd != newfd)
+			close(oldfd);
+	}
+	return (ret);
+}

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_command.h                                        :+:      :+:    :+:   */
+/*   bi_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 13:19:16 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/02/27 17:59:19 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/02/27 18:00:27 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_COMMAND_H
-# define T_COMMAND_H
+#include "execution.h"
 
-# include "structs.h"
-
-typedef struct s_command
+void	execute_unset(t_execution *exec)
 {
-	t_token	*redir;
-	char	*name;
-	char	**args;
-}	t_command;
+	t_command	*cmd;
+	int			index;
+	t_list		*node;
 
-
-#endif
+	index = 0;
+	cmd = exec->current->content;
+	if (cmd->args)
+	{
+		while (cmd->args[index])
+		{
+			node = ft_envp_node(exec->envp, cmd->args[index]);
+			if (node)
+				ft_lstdelone(ft_lstdetach(&exec->envp, node), free);
+			index++;
+		}
+	}
+	g_global = 0;
+}

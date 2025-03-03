@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_cmd.c                                      :+:      :+:    :+:   */
+/*   get_cmd_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 15:38:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:11:17 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/02/27 17:13:54 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/03/03 12:14:29 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static char	**prepare_args(t_command *cmd)
+static char	*absolute_path(char *path)
 {
-	char	**args;
-	int		index;
+	struct stat	info;
 
-	index = 0;
-	if (cmd->args)
+	if (access(path, F_OK) == -1)
 	{
-		while (cmd->args[index])
-			index++;
-		args = ft_calloc(index + 2, sizeof(char *));
-		if (!args)
-			return (NULL);
-		args[0] = cmd->name;
-		index = -1;
-		while (cmd->args[++index])
-			args[index + 1] = cmd->args[index];
+		ft_fprintf(2, "minishell: Command not found.\n");
+		return (NULL);
 	}
-	else
+	if (access(path, X_OK) == -1)
 	{
-		args = ft_calloc(index + 2, sizeof(char *));
-		if (!args)
-			return (NULL);
-		args[0] = cmd->name;
+		ft_fprintf(2, "minishell: Permission denied.\n");
+		return (NULL);
 	}
-	return (args);
+	stat(path, &info);
+	if (S_ISDIR(info.st_mode))
+	{
+		ft_fprintf(2, "minishell: Is a directory.\n");
+		return (NULL);
+	}
+	return (path);
 }
 
 static char	*check_cmd_path(char **split_path, char *cmd_name)
@@ -45,8 +40,6 @@ static char	*check_cmd_path(char **split_path, char *cmd_name)
 	int		index;
 	char	*cmd_path;
 
-	if (access(cmd_name, X_OK) == 0)
-		return (cmd_name);
 	index = 0;
 	while (split_path[index])
 	{
@@ -61,7 +54,7 @@ static char	*check_cmd_path(char **split_path, char *cmd_name)
 	return (NULL);
 }
 
-static char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
+char	*alias_path(t_command *cmd, t_list *ep_lst)
 {
 	char	*full_cmd;
 	char	*path;
@@ -73,7 +66,10 @@ static char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
 		return (NULL);
 	splitted = ft_split(path, ':');
 	if (!splitted)
+	{
+		ft_fprintf(2, "minishell: malloc error\n");
 		return (NULL);
+	}
 	full_cmd = check_cmd_path(splitted, cmd->name);
 	index = 0;
 	while (splitted[index])
@@ -85,26 +81,17 @@ static char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
 	return (full_cmd);
 }
 
-void	execute_cmd(t_execution *exec)
+char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
 {
-	char		*cmd_path;
-	char		**args;
-	char		**envp;
+	char	*path;
 
-	prepare_exec(exec->current->content);
-	cmd_path = get_cmd_path(exec->current->content, exec->envp);
-	if (!cmd_path)
+	if (cmd->name[0] == '.' || cmd->name[0] == '/')
+		return (absolute_path(cmd->name));
+	else
 	{
-		ft_lstclear(&exec->envp, free);
-		ft_lstclear(&exec->cmds, free_cmd);
-		perror("Command not found");
-		exit(127);
-	}
-	args = prepare_args(exec->current->content);
-	envp = (char **)ft_lsttoarr(exec->envp);
-	if (execve(cmd_path, args, envp) == -1)
-	{
-		perror("execve failed");
-		exit(128);
+		path = alias_path(cmd, ep_lst);
+		if (!path)
+			ft_fprintf(2, "minishell: Command not found.\n");
+		return (path);
 	}
 }

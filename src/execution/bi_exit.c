@@ -6,71 +6,11 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:02 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/25 16:02:50 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:00:40 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-void	execute_unset(t_execution *exec)
-{
-	t_command	*cmd;
-	int			index;
-	t_list		*node;
-
-	index = 0;
-	cmd = exec->current->content;
-	if (cmd->args)
-	{
-		while (cmd->args[index])
-		{
-			node = ft_envp_node(exec->envp, cmd->args[index]);
-			if (node)
-				ft_lstdelone(ft_lstdetach(&exec->envp, node), free);
-			index++;
-		}
-	}
-}
-
-static void	export_print(t_execution *exec)
-{
-	t_list	*node;
-
-	prepare_exec(exec->current->content);
-	node = exec->envp;
-	while (node)
-	{
-		if (node->content)
-			printf("%s\n", (char *)node->content);
-		node = node->next;
-	}
-}
-
-void	execute_export(t_execution *exec)
-{
-	int			index;
-	t_command	*cmd;
-	char		**splitted;
-
-	cmd = exec->current->content;
-	if (!cmd->args)
-		export_print(exec);
-	else
-	{
-		index = 0;
-		while (cmd->args[index])
-		{
-			splitted = ft_split(cmd->args[index], '=');
-			if (!splitted)
-				return ;
-			ft_setenv(exec->envp, splitted[0], splitted[1]);
-			free(splitted[0]);
-			free(splitted[1]);
-			free(splitted);
-			index++;
-		}
-	}
-}
 
 static t_bool	ft_isnumber(char *str)
 {

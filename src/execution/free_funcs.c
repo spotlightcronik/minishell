@@ -6,11 +6,25 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:33:01 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/24 16:32:09 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:14:32 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
+void	free_redir(t_token	*redir)
+{
+	int			index;
+
+	index = 0;
+	while (redir[index].type)
+	{
+		free(redir[index].type);
+		free(redir[index].content);
+		index++;
+	}
+	free(redir);
+}
 
 void	free_cmd(void *ptr)
 {
@@ -20,8 +34,8 @@ void	free_cmd(void *ptr)
 	cmd = ptr;
 	if (cmd)
 	{
-		if (cmd->infile)
-			free(cmd->infile);
+		if (cmd->redir)
+			free_redir(cmd->redir);
 		if (cmd->name)
 			free(cmd->name);
 		if (cmd->args)
@@ -34,8 +48,6 @@ void	free_cmd(void *ptr)
 			}
 			free(cmd->args);
 		}
-		if (cmd->output)
-			free(cmd->output);
 		free(cmd);
 	}
 }

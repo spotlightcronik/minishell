@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:13:54 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 17:55:54 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:14:29 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	*alias_path(t_command *cmd, t_list *ep_lst)
 char	*get_cmd_path(t_command *cmd, t_list *ep_lst)
 {
 	char	*path;
+
 	if (cmd->name[0] == '.' || cmd->name[0] == '/')
 		return (absolute_path(cmd->name));
 	else

@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:40:04 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 12:00:29 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:14:16 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	heredoc_read(int fd, t_token tok)
 static char	*create_file(t_command *cmd, t_token *tok)
 {
 	static int	index = 0;
-	char	*filename;
-	char	*index_str;
+	char		*filename;
+	char		*index_str;
 
 	index_str = ft_itoa(index);
 	filename = ft_strjoin("/tmp/heredoc", index_str);
@@ -100,7 +100,7 @@ int	heredoc_manager(t_execution *exec)
 	return (0);
 }
 
-void clean_heredoc(t_execution exec)
+void	clean_heredoc(t_execution exec)
 {
 	int			index;
 	t_list		*node;

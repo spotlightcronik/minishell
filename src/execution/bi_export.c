@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:00:53 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 18:36:31 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:14:51 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	valid_export(char *str)
 		return (0);
 	}
 	index = 1;
-	while (str[index]) 
+	while (str[index])
 	{
 		if (!isalpha(str[index]))
 		{
@@ -81,7 +81,7 @@ void	execute_export(t_execution *exec)
 {
 	t_command	*cmd;
 	int			errred;
-	
+
 	cmd = exec->current->content;
 	errred = 0;
 	if (!cmd->args)

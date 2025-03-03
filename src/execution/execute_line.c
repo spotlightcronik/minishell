@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 14:40:05 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:05:59 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	execute_line(t_list *lst, t_list *envp)
 	if (!exec.pid)
 		return ;
 	waitpid(exec.pid, &wstatus, 0);
+	kill(0, SIGQUIT);
 	clean_heredoc(exec);
 	if (WIFEXITED(wstatus))
 		g_global = WEXITSTATUS(wstatus);

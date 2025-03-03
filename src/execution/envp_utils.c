@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:18:45 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/25 15:00:28 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:05:48 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_getenv(t_list *envp, char *env_name)
 	return (node->content);
 }
 
-int	ft_setenv(t_list *envp, char *env_name, char *value)
+int	ft_setenv(t_list **envp, char *env_name, char *value)
 {
 	char	*placeholder;
 	t_list	*node;

@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:10:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 17:32:25 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:08:09 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static int	redir_input(t_token tok)
 
 	if (access(tok.content, F_OK))
 	{
-		ft_fprintf(2, "minishell: %s: does not exist.", tok.content);
+		ft_fprintf(2, "minishell: %s: does not exist.\n", tok.content);
 		return (-1);
 	}
 	if (access(tok.content, R_OK))
 	{
-		ft_fprintf(2, "minishell: %s: permission denied.", tok.content);
+		ft_fprintf(2, "minishell: %s: permission denied.\n", tok.content);
 		return (-1);
 	}
 	in_fd = open(tok.content, O_RDONLY);
@@ -44,7 +44,7 @@ static int	redir_output(t_token tok)
 
 	if (access(tok.content, W_OK) == -1)
 	{
-		ft_fprintf(2, "minishell: %s: permission denied.", tok.content);
+		ft_fprintf(2, "minishell: %s: permission denied.\n", tok.content);
 		return (-1);
 	}
 	if (!ft_strcmp(tok.content, "outfile"))

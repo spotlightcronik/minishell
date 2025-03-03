@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 12:15:46 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:01:54 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <signal.h>
 # include <fcntl.h>
 # include <dirent.h>
 # include <sys/types.h>
@@ -70,7 +71,7 @@ void	execute_builtin(t_execution *exec, t_fd in, t_fd out);
 
 // envp_utils.c
 char	*ft_getenv(t_list *envp, char *env_name);
-int		ft_setenv(t_list *envp, char *env_name, char *value);
+int		ft_setenv(t_list **envp, char *env_name, char *value);
 t_list	*ft_envp_node(t_list *envp, char *env_name);
 
 // bi_print.c

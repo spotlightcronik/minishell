@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bi_action.c                                        :+:      :+:    :+:   */
+/*   bi_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:02 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 18:00:40 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:10:22 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	execute_exit(t_execution *exec)
 	if (cmd->args)
 		while (cmd->args[argc])
 			argc++;
+	g_global = 1;
 	if (argc > 1 || (argc == 1 && !ft_isnumber(cmd->args[0])))
 		ft_printf("Usage: exit [number]\n");
 	else

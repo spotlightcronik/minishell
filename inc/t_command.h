@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 13:19:16 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:13:25 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ typedef struct s_command
 	char	*name;
 	char	**args;
 }	t_command;
-
 
 #endif

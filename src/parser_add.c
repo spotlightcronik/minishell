@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:09:05 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 11:56:31 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:39:09 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,60 @@ int	add_word(t_info *data, char *word)
 	return (data->count++, 0);
 }
 
-int	add_heredoc(t_info *data)
+int add_to_list(t_token new, t_command *add)
+{
+	int count;
+	t_token *temp;
+
+	count = 0;
+	while (add->redir[count].type != NULL)
+		count++;
+	temp = malloc((count + 1) * sizeof(t_token));
+	if (!temp)
+		return(1);
+	count = 0;
+	while (add->args[count] != NULL)
+	{
+		temp[count] = add->redir[count];
+		count++;
+	}
+	temp[count] = new;
+	temp[count + 1].type = NULL;
+	return(0);
+}
+
+int	add_redir(t_info *data, char *name)
 {
 	t_list		*temp;
 	t_command	*add;
+	t_token		new;
 
 	temp = ft_lstlast(data->action_list);
 	add = (t_command *)temp->content;
-	if (add->heredoc != NULL)
-		return (perror("Failed to allocate heredoc"), 1);
 	if (add->args != NULL && ft_strcmp(data->token_list[data->count + 1].type,
 			"word") != 0)
-		return (perror("Sintax error not word after heredoc"), 1);
+		return (printf("Sintax error not word after heredoc"), 1);
 	data->count++;
-	add->heredoc = ft_strdup(data->token_list[data->count].content);
-	if (!add->heredoc)
-		return (perror("Failed to allocate heredoc"), 1);
+	new.content = ft_strdup(data->token_list[data->count].content);
+	if (!new.content)
+		return (printf("Failed to allocate memory"), 1);
+	new.type = ft_strdup(name);
+	if(!new.type)
+	return (printf("Failed to allocate memory"), 1);
+	if (add_to_list(new, add) != 0)
+		return(1);
 	data->count++;
 	return (0);
 }
-
-int	add_redir(t_info *data, int r)
+/*
+int	add_redir(t_info *data, char *name)
 {
 	t_list		*temp;
 	t_command	*add;
+	t_token		new;
 
 	temp = ft_lstlast(data->action_list);
 	add = (t_command *)temp->content;
-	if (add->heredoc != NULL)
-		return (perror("Failed to find content"), 1);
 	if (add->args != NULL && ft_strcmp(data->token_list[data->count + 1].type,
 			"word") != 0)
 		return (1);
@@ -99,4 +124,4 @@ int	add_input(t_info *data)
 		return (1);
 	data->count++;
 	return (0);
-}
+} */

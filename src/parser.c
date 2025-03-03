@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:16:26 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 15:18:25 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:42:43 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ int	add_comand(t_info *data)
 		return (free(command), 1);
 	command->name = NULL;
 	command->args = NULL;
-	command->append = 0;
-	command->heredoc = NULL;
-	command->infile = NULL;
-	command->output = NULL;
+	command->redir = NULL;
 	ft_lstadd_back(&data->action_list, new);
 	return (0);
 }
@@ -36,13 +33,13 @@ int	add_comand(t_info *data)
 int	redir(t_info *data, char *word)
 {
 	if (ft_strcmp(word, "<<") == 0)
-		return (add_heredoc(data));
+		return (add_redir(data, "heredoc"));
 	if (ft_strcmp(word, ">>") == 0)
-		return (add_redir(data, 1));
+		return (add_redir(data, "append"));
 	if (ft_strcmp(word, "<") == 0)
-		return (add_input(data));
+		return (add_redir(data, "infile"));
 	if (ft_strcmp(word, ">") == 0)
-		return (add_redir(data, 0));
+		return (add_redir(data, "outfile"));
 	return (0);
 }
 

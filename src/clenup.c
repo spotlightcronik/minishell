@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/25 12:54:53 by auloth           ###   ########.fr       */
+/*   Updated: 2025/02/26 13:45:06 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,10 @@ void	del_w_commands(void *content)
 		return ;
 	count = 0;
 	del = (t_command *)content;
-	if (del->heredoc)
-		free(del->heredoc);
-	if (del->infile)
-		free(del->infile);
 	if (del->name)
 		free(del->name);
-	if (del->output)
-		free(del->output);
+	if(del->redir)
+		free(del->redir);
 	if (del->args)
 	{
 		while (del->args && del->args[count] != NULL)

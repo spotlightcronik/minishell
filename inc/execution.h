@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:01:54 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:15:32 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ typedef struct s_execution
 {
 	t_list		*cmds;
 	t_list		*current;
-	t_list		*envp;
+	t_list		**envp;
 	int			size;
 	int			index;
 	pid_t		pid;
 }	t_execution;
 
 //execute_line.c
-void	execute_line(t_list *lst, t_list *envp);
+void	execute_line(t_list *lst, t_list **envp);
 
 // heredoc_manager.c
 int		heredoc_manager(t_execution *exec);

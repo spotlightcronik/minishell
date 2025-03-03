@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:05:59 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:18:36 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	multiple_cmd(t_execution *exec)
 	return (0);
 }
 
-static void	parse_to_exec(t_execution *exec, t_list *cmds, t_list *envp)
+static void	parse_to_exec(t_execution *exec, t_list *cmds, t_list **envp)
 {
 	ft_bzero(exec, sizeof(t_execution));
 	exec->cmds = cmds;
@@ -66,7 +66,7 @@ static int	validate_cmds(t_execution *exec)
 	return (0);
 }
 
-void	execute_line(t_list *lst, t_list *envp)
+void	execute_line(t_list *lst, t_list **envp)
 {
 	t_execution	exec;
 	int			wstatus;

@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:00:53 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:05:17 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:16:22 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	export_print(t_execution *exec)
 	t_list	*node;
 
 	execute_redirs(exec->current->content);
-	node = exec->envp;
+	node = *exec->envp;
 	while (node)
 	{
 		if (node->content)

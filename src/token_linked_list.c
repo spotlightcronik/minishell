@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/03 14:38:25 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:46:08 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,11 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 	t_list	*temp;
 	char	*arr;
 	int		count;
+	char	t;
 
 	count = co;
-	if (data->str[count] == ' ')
+	t = data->str[count];
+	if (t == ' ' || t == 0 || t == 39 || t == 34)
 		return(0);
 	if (data->str[count] == '?')
 		return (insert_global(&data->str, ft_itoa(g_global), co - 1));

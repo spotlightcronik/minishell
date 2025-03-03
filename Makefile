@@ -1,7 +1,16 @@
 NAME = minishell
 
 CFLAGS	=	-g -Wall -Wextra -Werror
-FILES	=	hardcode_parse.c \
+FILES	=	clenup.c \
+			main.c \
+			parser_add.c \
+			parser_extra.c \
+			parser.c \
+			token.c \
+			token_extra_functions.c \
+			token_linked_list.c \
+			token_to_list.c \
+			signals.c \
 			execution/bi_exit.c \
 			execution/bi_unset.c \
 			execution/bi_export.c \

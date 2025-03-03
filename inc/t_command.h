@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/26 13:34:12 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:15:53 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_token
 	char	*content;
 }	t_token;
 
-#endif
+# endif
 
 typedef struct s_command
 {

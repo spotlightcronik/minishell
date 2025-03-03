@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 18:04:13 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:15:46 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-extern int g_global;
+extern int		g_global;
 
 typedef int		t_fd;
 typedef t_fd	t_pipe[2];

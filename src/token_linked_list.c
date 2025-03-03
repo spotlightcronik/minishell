@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/26 12:01:08 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:38:25 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 	int		count;
 
 	count = co;
+	if (data->str[count] == ' ')
+		return(0);
 	if (data->str[count] == '?')
 		return (insert_global(&data->str, ft_itoa(g_global), co - 1));
 	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])

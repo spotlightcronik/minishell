@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:45:26 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:12:17 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ void	execute_line(t_list *lst, t_list **envp)
 	if (WIFEXITED(wstatus))
 		g_global = WEXITSTATUS(wstatus);
 	else if (WIFSIGNALED(wstatus))
-		g_global = WTERMSIG(wstatus);
+		g_global = WTERMSIG(wstatus) + 128;
 }

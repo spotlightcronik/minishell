@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:28:07 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:21:10 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:13:39 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	cd_home(t_execution *exec)
 
 static void	cd_path2(t_execution *exec)
 {
-	DIR 		*fd;
+	DIR			*fd;
 	t_command	*cmd;
 
 	cmd = exec->current->content;

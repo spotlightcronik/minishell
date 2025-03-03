@@ -6,7 +6,8 @@
 !lib
 !lib/*
 !src
+!src/*
 !src/execution
 !src/execution/*
-src/execution_parser.c
+src/hardcode_parse.c
 !Makefile

@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:28:07 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 12:14:54 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:21:27 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static void	cd_home(t_execution *exec)
 		ft_fprintf(2, "minishell: cd: HOME is not set\n");
 		return ;
 	}
-	value = ft_strchr(node->content, '=') + 1;
+	value = ft_strchr(node->content, '=');
 	if (!value)
 	{
 		g_global = 2;
 		ft_fprintf(2, "minishell: cd: HOME is not defined\n");
 		return ;
 	}
-	chdir(value);
+	chdir(value + 1);
 	update_pwd(exec);
 	g_global = 0;
 }

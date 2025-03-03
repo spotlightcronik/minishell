@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:16:26 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/26 13:42:43 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:20:11 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	add_comand(t_info *data)
 		return (free(command), 1);
 	command->name = NULL;
 	command->args = NULL;
-	command->redir = NULL;
+	command->redir = malloc(sizeof(t_token));
+	if(!command->redir)
+		return(1);
+	command->redir->type = NULL;
 	ft_lstadd_back(&data->action_list, new);
 	return (0);
 }

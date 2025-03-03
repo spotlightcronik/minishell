@@ -54,8 +54,7 @@ obj/%.o: src/%.c
 	gcc $(INCS) -c $< $(CFLAGS) -Ilibft -o $@
 
 clean:
-	rm -f $(OBJ)
-	rm -f $(OBJ_BONUS)
+	rm -rf obj
 	$(MAKE) -C lib/libft clean
 
 fclean: clean

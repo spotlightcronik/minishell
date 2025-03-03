@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:38:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 17:56:15 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:05:15 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	**prepare_args(t_command *cmd)
 		if (!args)
 			return (NULL);
 		args[0] = cmd->name;
-		while (cmd->args[--index])
+		while (index--)
 			args[index + 1] = cmd->args[index];
 	}
 	else

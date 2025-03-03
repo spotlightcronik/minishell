@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:06:43 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 18:11:28 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:09:20 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	echo_print(t_command *cmd)
 	int			index;
 	int			nl;
 
+	if (!cmd->args[0])
+		return (1);
 	index = 0;
 	nl = 1;
 	if (!ft_strcmp(cmd->args[0], "-n"))
@@ -37,7 +39,9 @@ static int	echo_print(t_command *cmd)
 void	execute_echo(t_execution *exec)
 {
 	t_command	*cmd;
-
+	int			nl;
+	
+	nl = 1;
 	cmd = exec->current->content;
 	if (execute_redirs(cmd) == -1)
 	{
@@ -46,8 +50,9 @@ void	execute_echo(t_execution *exec)
 	}
 	if (cmd->args)
 	{
-		if (echo_print(cmd))
-			printf("\n");
+		nl = echo_print(cmd);
 	}
+	if (nl)
+		printf("\n");
 	g_global = 0;
 }

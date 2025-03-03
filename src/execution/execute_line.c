@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/26 16:52:20 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:40:05 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,25 @@ static void	parse_to_exec(t_execution *exec, t_list *cmds, t_list *envp)
 	exec->size = ft_lstsize(exec->cmds);
 }
 
+static int	validate_cmds(t_execution *exec)
+{
+	t_list		*lst;
+	t_command	*cmd;
+
+	lst = exec->current;
+	while (lst)
+	{
+		cmd = lst->content;
+		if (!cmd->name)
+		{
+			ft_fprintf(2, "minishell: no command found\n");
+			return (1);
+		}
+		lst = lst->next;
+	}
+	return (0);
+}
+
 void	execute_line(t_list *lst, t_list *envp)
 {
 	t_execution	exec;
@@ -55,6 +74,8 @@ void	execute_line(t_list *lst, t_list *envp)
 	if (!lst || !lst->content)
 		return ;
 	parse_to_exec(&exec, lst, envp);
+	if (validate_cmds(&exec))
+		return ;
 	if (heredoc_manager(&exec) == -1)
 		return ;
 	if (exec.size == 1)

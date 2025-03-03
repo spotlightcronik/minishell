@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:09:05 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/03 14:30:08 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/03 15:04:29 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	add_to_list(t_token new, t_command *add)
 	}
 	temp[count] = new;
 	temp[count + 1].type = NULL;
+	free(add->redir);
+	add->redir = temp;
 	return (0);
 }
 

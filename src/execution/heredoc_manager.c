@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:40:04 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 12:14:16 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:38:21 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
 
 static void	heredoc_read(int fd, t_token tok)
 {
@@ -19,6 +20,7 @@ static void	heredoc_read(int fd, t_token tok)
 	rl = readline("minishell heredoc >");
 	while (rl)
 	{
+		rl = check_env(rl);
 		if (!ft_strcmp(rl, tok.content))
 			break ;
 		ft_putstr_fd(rl, fd);

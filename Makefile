@@ -27,6 +27,7 @@ FILES	=	clenup.c \
 			execution/execute_redirs.c \
 			execution/ft_dup2.c \
 			execution/get_cmd_path.c \
+			execution/alis_getenv.c \
 			execution/signals_child.c \
 			execution/heredoc_manager.c
 

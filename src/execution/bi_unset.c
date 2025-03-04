@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:59:19 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 18:00:27 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:16:53 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	execute_unset(t_execution *exec)
 	{
 		while (cmd->args[index])
 		{
-			node = ft_envp_node(exec->envp, cmd->args[index]);
+			node = ft_envp_node(*exec->envp, cmd->args[index]);
 			if (node)
-				ft_lstdelone(ft_lstdetach(&exec->envp, node), free);
+				ft_lstdelone(ft_lstdetach(exec->envp, node), free);
 			index++;
 		}
 	}

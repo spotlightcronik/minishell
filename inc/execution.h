@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:36:13 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 12:55:22 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <signal.h>
 # include <fcntl.h>
 # include <dirent.h>
 # include <sys/types.h>
@@ -34,14 +35,14 @@ typedef struct s_execution
 {
 	t_list		*cmds;
 	t_list		*current;
-	t_list		*envp;
+	t_list		**envp;
 	int			size;
 	int			index;
 	pid_t		pid;
 }	t_execution;
 
 //execute_line.c
-void	execute_line(t_list *lst, t_list *envp);
+void	execute_line(t_list *lst, t_list **envp);
 
 // heredoc_manager.c
 int		heredoc_manager(t_execution *exec);
@@ -70,7 +71,7 @@ void	execute_builtin(t_execution *exec, t_fd in, t_fd out);
 
 // envp_utils.c
 char	*ft_getenv(t_list *envp, char *env_name);
-int		ft_setenv(t_list *envp, char *env_name, char *value);
+int		ft_setenv(t_list **envp, char *env_name, char *value);
 t_list	*ft_envp_node(t_list *envp, char *env_name);
 
 // bi_print.c
@@ -91,5 +92,9 @@ void	execute_exit(t_execution *exec);
 void	execute_cd(t_execution *exec);
 // alis env expansion
 char	*check_env(char *str);
+
+// signals_child.c
+void	signals_child(void);
+void	signals_exec(void);
 
 #endif

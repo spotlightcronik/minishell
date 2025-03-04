@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_command.h                                        :+:      :+:    :+:   */
+/*   signals_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:48:17 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 19:13:25 by jeperez-         ###   ########.fr       */
+/*   Created: 2025/03/04 12:38:27 by jeperez-          #+#    #+#             */
+/*   Updated: 2025/03/04 12:50:40 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_COMMAND_H
-# define T_COMMAND_H
+#include "execution.h"
 
-# include "structs.h"
-
-typedef struct s_command
+void	signals_exec(void)
 {
-	t_token	*redir;
-	char	*name;
-	char	**args;
-}	t_command;
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
 
-#endif
+void	signals_child(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}

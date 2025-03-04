@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_linked_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/03 14:46:08 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 12:00:25 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
-
-extern int	g_global;
 
 int	insert_envpar(char **dest, char *add, int place)
 {
@@ -84,7 +82,7 @@ char	*getenv_morelines(char *arr, t_list *temp, int *count)
 	while (arr[*count] != '=')
 		(*count)++;
 	(*count)++;
-	return(arr);
+	return (arr);
 }
 
 int	ft_getenv_parse(t_info *data, int co, int insert)
@@ -97,7 +95,7 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 	count = co;
 	t = data->str[count];
 	if (t == ' ' || t == 0 || t == 39 || t == 34)
-		return(0);
+		return (0);
 	if (data->str[count] == '?')
 		return (insert_global(&data->str, ft_itoa(g_global), co - 1));
 	while (ft_isalpha(data->str[count]) || ft_isdigit(data->str[count])

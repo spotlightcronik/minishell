@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 14:40:05 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:46:19 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ static int	multiple_cmd(t_execution *exec)
 	return (0);
 }
 
-static void	parse_to_exec(t_execution *exec, t_list *cmds, t_list *envp)
+static void	parse_to_exec(t_execution *exec, t_list *cmds, t_list **envp)
 {
+	signals_exec();
 	ft_bzero(exec, sizeof(t_execution));
 	exec->cmds = cmds;
 	exec->envp = envp;
@@ -66,11 +67,12 @@ static int	validate_cmds(t_execution *exec)
 	return (0);
 }
 
-void	execute_line(t_list *lst, t_list *envp)
+void	execute_line(t_list *lst, t_list **envp)
 {
 	t_execution	exec;
 	int			wstatus;
 
+	wstatus = 0;
 	if (!lst || !lst->content)
 		return ;
 	parse_to_exec(&exec, lst, envp);
@@ -82,10 +84,12 @@ void	execute_line(t_list *lst, t_list *envp)
 		ft_fork(&exec, 0, 1);
 	else
 		multiple_cmd(&exec);
-	if (!exec.pid)
-		return ;
-	waitpid(exec.pid, &wstatus, 0);
+	if (exec.pid)
+		waitpid(exec.pid, &wstatus, 0);
 	clean_heredoc(exec);
+	kill(0, SIGQUIT);
 	if (WIFEXITED(wstatus))
 		g_global = WEXITSTATUS(wstatus);
+	else if (WIFSIGNALED(wstatus))
+		g_global = WTERMSIG(wstatus) + 128;
 }

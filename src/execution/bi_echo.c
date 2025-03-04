@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:06:43 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 14:09:20 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:14:29 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	execute_echo(t_execution *exec)
 {
 	t_command	*cmd;
 	int			nl;
-	
+
 	nl = 1;
 	cmd = exec->current->content;
 	if (execute_redirs(cmd) == -1)

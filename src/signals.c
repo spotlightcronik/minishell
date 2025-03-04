@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:00:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/03 13:24:14 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:49:38 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@ void	handle_sigint(int sig)
 	rl_redisplay();
 }
 
-void	handle_sigquit(int sig)
-{
-	(void)sig;
-}
-
 void	init_signals(void)
 {
 	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	signal(SIGQUIT, SIG_IGN);
 }

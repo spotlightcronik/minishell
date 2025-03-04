@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:16:26 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/03 14:20:11 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 12:00:33 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	add_comand(t_info *data)
 	command->name = NULL;
 	command->args = NULL;
 	command->redir = malloc(sizeof(t_token));
-	if(!command->redir)
-		return(1);
+	if (!command->redir)
+		return (1);
 	command->redir->type = NULL;
 	ft_lstadd_back(&data->action_list, new);
 	return (0);

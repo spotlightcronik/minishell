@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bi_action.c                                        :+:      :+:    :+:   */
+/*   bi_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:02 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/02/27 18:00:40 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:16:14 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	execute_exit(t_execution *exec)
 	if (cmd->args)
 		while (cmd->args[argc])
 			argc++;
+	g_global = 1;
 	if (argc > 1 || (argc == 1 && !ft_isnumber(cmd->args[0])))
 		ft_printf("Usage: exit [number]\n");
 	else
@@ -46,8 +47,8 @@ void	execute_exit(t_execution *exec)
 			exit_code = ft_atoi(cmd->args[0]);
 		if (exec->cmds)
 			ft_lstclear(&exec->cmds, free_cmd);
-		if (exec->envp)
-			ft_lstclear(&exec->envp, free);
+		if (*exec->envp)
+			ft_lstclear(exec->envp, free);
 		clear_history();
 		exit(exit_code);
 	}

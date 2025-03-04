@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:09:05 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/03 15:04:29 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 11:59:24 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	add_redir(t_info *data, char *name)
 
 	temp = ft_lstlast(data->action_list);
 	add = (t_command *)temp->content;
-	if ((data->count + 1 >= data->token_list_size) || ft_strcmp(data->token_list[data->count + 1].type, "word") != 0)
+	if ((data->count + 1 >= data->token_list_size)
+		|| ft_strcmp(data->token_list[data->count + 1].type, "word") != 0)
 		return (printf("Sintax error no word after redirection \n"), 1);
 	data->count++;
 	new.content = ft_strdup(data->token_list[data->count].content);

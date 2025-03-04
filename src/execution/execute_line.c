@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 19:12:17 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:46:19 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	multiple_cmd(t_execution *exec)
 
 static void	parse_to_exec(t_execution *exec, t_list *cmds, t_list **envp)
 {
+	signals_exec();
 	ft_bzero(exec, sizeof(t_execution));
 	exec->cmds = cmds;
 	exec->envp = envp;

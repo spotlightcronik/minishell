@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:15:32 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:46:03 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,9 @@ void	execute_exit(t_execution *exec);
 
 // bi_cd.c
 void	execute_cd(t_execution *exec);
+
+// signals_child.c
+void	signals_child(void);
+void	signals_exec(void);
 
 #endif

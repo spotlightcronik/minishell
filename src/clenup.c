@@ -6,17 +6,11 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/04 12:43:57 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:50:24 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "a_minishell.h"
-
-void	del(void *arr)
-{
-	free(arr);
-	return ;
-}
 
 static void	del_tokens(void *content)
 {
@@ -71,6 +65,13 @@ int	clenup(t_info *data)
 	free(data->token_list);
 	free(data->str);
 	data->token_list_size = 0;
+	return (1);
+}
+
+int	full_clenup(t_info *data)
+{
+	clenup(data);
+	ft_lstclear(&data->env_param, free);
 	return (1);
 }
 

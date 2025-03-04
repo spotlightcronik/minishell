@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:10:34 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 15:08:09 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:55:48 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,21 @@ static int	redir_output(t_token tok)
 {
 	t_fd	out_fd;
 
-	if (access(tok.content, W_OK) == -1)
-	{
-		ft_fprintf(2, "minishell: %s: permission denied.\n", tok.content);
-		return (-1);
-	}
-	if (!ft_strcmp(tok.content, "outfile"))
+	if (!ft_strcmp(tok.type, "outfile"))
 	{
 		while (access(tok.content, F_OK) == 0)
 			unlink(tok.content);
 		out_fd = open(tok.content, O_CREAT | O_WRONLY, 00644);
 	}
 	else
+	{
+		if (access(tok.content, W_OK) == -1)
+		{
+			ft_fprintf(2, "minishell: %s: permission denied.\n", tok.content);
+			return (-1);
+		}
 		out_fd = open(tok.content, O_CREAT | O_APPEND | O_WRONLY, 00644);
+	}
 	if (out_fd == -1)
 	{
 		ft_fprintf(2, "minishell: %s: is a directory\n", tok.content);

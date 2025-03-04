@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a_minishell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:23:22 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/26 13:45:54 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 15:50:38 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 extern int	g_global;
 
 int			clenup(t_info *data);
+int			full_clenup(t_info *data);
 int			create_token(t_info *data, char *simbol, char *name);
 int			tokenize(t_info *data);
 int			dtll(t_list **list, char **arr);

@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:00:53 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:16:22 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:22:15 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	valid_export(char *str)
 {
 	int	index;
 
-	if (!isalnum(str[0]))
+	if (!ft_isalpha(str[0]))
 	{
 		ft_fprintf(2, "minishell: %s: invalid name\n", str);
 		return (0);
@@ -38,7 +38,7 @@ static int	valid_export(char *str)
 	index = 1;
 	while (str[index] && str[index] != '=')
 	{
-		if (!isalpha(str[index]))
+		if (!ft_isalnum(str[index]))
 		{
 			ft_fprintf(2, "minishell: %s: invalid name\n", str);
 			return (0);

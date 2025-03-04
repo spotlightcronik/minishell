@@ -44,27 +44,26 @@ INCS		:=	-I ./inc \
 all: library  $(NAME)
 
 obj:
-	mkdir -p obj/execution
+	@mkdir -p obj/execution
 
 library:
-	@cd lib/libft && $(MAKE)
+	@$(MAKE) -sC lib/libft all
 
 $(NAME): obj $(OBJ)
-	cc $(CFLAGS) $(OBJ) -lreadline $(LIB) -o $(NAME) $(LDFLAGS)
-
+	@cc $(CFLAGS) $(OBJ) -lreadline $(LIB) -o $(NAME) $(LDFLAGS)
 
 obj/%.o: src/%.c
-	gcc $(INCS) -c $< $(CFLAGS) -Ilibft -o $@
+	@gcc $(INCS) -c $< $(CFLAGS) -Ilibft -o $@
 
 clean:
-	rm -rf obj
-	$(MAKE) -C lib/libft clean
+	@rm -rf obj
+	@$(MAKE) -sC lib/libft clean
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f $(NAME_BONUS)
-	rm -f $(LIB)
-	$(MAKE) -C lib/libft fclean
+	@rm -f $(NAME)
+	@rm -f $(NAME_BONUS)
+	@rm -f $(LIB)
+	@$(MAKE) -sC lib/libft fclean
 
 re: fclean all
 

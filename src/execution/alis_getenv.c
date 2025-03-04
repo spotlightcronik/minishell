@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/04 14:29:11 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 15:28:08 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char	*expand(char *str, char *add, int count)
 		c++;
 		size++;
 	}
+	if (size == -1)
+		size = 0;
 	new = calloc(size + ft_strlen(add) + 1, sizeof(char));
 	if (!new)
 		return (NULL);

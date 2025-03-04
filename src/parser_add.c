@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:09:05 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/04 11:59:24 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:01:01 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	add_to_list(t_token new, t_command *add)
 	count = 0;
 	while (add != NULL && add->redir[count].type != NULL)
 		count++;
-	temp = malloc((count + 1) * sizeof(t_token));
+	temp = malloc((count + 2) * sizeof(t_token));
 	if (!temp)
 		return (1);
 	count = 0;

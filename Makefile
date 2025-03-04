@@ -25,6 +25,7 @@ FILES	=	clenup.c \
 			execution/free_funcs.c \
 			execution/ft_fork.c \
 			execution/execute_redirs.c \
+			execution/reopen_stdin.c \
 			execution/ft_dup2.c \
 			execution/get_cmd_path.c \
 			execution/alis_getenv.c \

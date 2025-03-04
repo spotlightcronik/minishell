@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:40:04 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:38:21 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 15:06:52 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static void	heredoc_read(int fd, t_token tok)
 		free(rl);
 		rl = readline("minishell heredoc >");
 	}
+	if (!rl && g_global != -1)
+		ft_fprintf(2, "minishell: found EoF, expected (%s)\n", tok.content);
+	reopen_stdin();
 	free(rl);
 }
 
@@ -82,6 +85,7 @@ int	heredoc_manager(t_execution *exec)
 	t_list		*node;
 	t_command	*cmd;
 
+	signals_heredoc();
 	node = exec->current;
 	while (node)
 	{

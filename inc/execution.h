@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:59:10 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/04 12:55:22 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:57:02 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,10 @@ char	*check_env(char *str);
 // signals_child.c
 void	signals_child(void);
 void	signals_exec(void);
+void	signals_heredoc(void);
+
+// reopen_stdin.c
+int	reopen_stdin(void);
+
 
 #endif

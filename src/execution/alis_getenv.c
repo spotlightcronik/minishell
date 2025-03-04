@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/04 15:28:08 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 15:47:03 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,15 @@ char	*expand(char *str, char *add, int count)
 
 	c = count;
 	size = count - 1;
-	while (str[c] != 0 && str[c] != ' ' && str[c] != 39 && str[c] != 34)
+	while (str[c] && str[c] != ' ' && str[c] != 39 && str[c] != 34)
+	{
+		if(str[c] == '?' && str[c - 1] == '$')
+		{
+			c++;
+			break;
+		}
 		c++;
+	}
 	while (str[c] != 0)
 	{
 		c++;
@@ -79,7 +86,7 @@ char	*expand(char *str, char *add, int count)
 	}
 	if (size == -1)
 		size = 0;
-	new = calloc(size + ft_strlen(add) + 1, sizeof(char));
+	new = ft_calloc(size + ft_strlen(add) + 2, sizeof(char));
 	if (!new)
 		return (NULL);
 	return (expand_closer(new, str, add, count));

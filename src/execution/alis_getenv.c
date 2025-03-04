@@ -6,7 +6,7 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/04 12:48:32 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/04 14:29:11 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ char	*expand_closer(char *new, char *str, char *add, int count)
 	c += ft_strlen(add);
 	while (str[c2])
 		new[c++] = str[c2++];
-	if (isalnum(add[0]))
-		free(add);
 	return (free(str), new);
 }
 

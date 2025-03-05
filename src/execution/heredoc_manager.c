@@ -6,12 +6,11 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:40:04 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/04 15:06:52 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/05 10:58:30 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
 
 static void	heredoc_read(int fd, t_token tok)
 {

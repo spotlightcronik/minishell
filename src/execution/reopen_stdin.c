@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:48:15 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/04 14:57:33 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/05 10:58:18 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	reopen_stdin(void)
 {
 	int	fd;
-	
+
 	if (access("/dev/tty", R_OK) == 0)
 	{
 		fd = open("/dev/tty", O_RDONLY);

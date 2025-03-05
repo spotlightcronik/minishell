@@ -6,34 +6,39 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:06:43 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 19:14:29 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/05 10:58:11 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static int	echo_print(t_command *cmd)
+static void	echo_print(t_command *cmd, int *nl)
 {
 	int			index;
-	int			nl;
+	int			options;
 
-	if (!cmd->args[0])
-		return (1);
+	if (!cmd->args || !cmd->args[0])
+		return ;
 	index = 0;
-	nl = 1;
-	if (!ft_strcmp(cmd->args[0], "-n"))
-	{
-		index++;
-		nl = 0;
-	}
+	options = 1;
 	while (cmd->args[index])
 	{
-		printf("%s", cmd->args[index]);
+		if (options)
+		{
+			if (cmd->args[index][0] == '-' && ft_strchr(cmd->args[index], 'n'))
+				*nl = 0;
+			else
+				options = 0;
+		}
+		if (!options)
+		{
+			printf("%s", cmd->args[index]);
+			if (cmd->args[index + 1])
+				printf(" ");
+		}
 		index++;
-		if (cmd->args[index])
-			printf(" ");
 	}
-	return (nl);
+	return ;
 }
 
 void	execute_echo(t_execution *exec)
@@ -43,15 +48,7 @@ void	execute_echo(t_execution *exec)
 
 	nl = 1;
 	cmd = exec->current->content;
-	if (execute_redirs(cmd) == -1)
-	{
-		g_global = 1;
-		return ;
-	}
-	if (cmd->args)
-	{
-		nl = echo_print(cmd);
-	}
+	echo_print(cmd, &nl);
 	if (nl)
 		printf("\n");
 	g_global = 0;

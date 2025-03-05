@@ -6,13 +6,11 @@
 /*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:38:50 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/04 15:47:03 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/05 11:42:06 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-extern int	g_global;
 
 char	*get_serch(char *str)
 {
@@ -48,10 +46,10 @@ char	*expand_closer(char *new, char *str, char *add, int count)
 	c2 = c;
 	while (str[c2] && str[c2] != ' ' && str[c2] != 39 && str[c2] != 34)
 	{
-		if(str[c2] == '?' && str[c2 - 1] == '$')
+		if (str[c2] == '?' && str[c2 - 1] == '$')
 		{
 			c2++;
-			break;
+			break ;
 		}
 		c2++;
 	}
@@ -72,18 +70,15 @@ char	*expand(char *str, char *add, int count)
 	size = count - 1;
 	while (str[c] && str[c] != ' ' && str[c] != 39 && str[c] != 34)
 	{
-		if(str[c] == '?' && str[c - 1] == '$')
+		if (str[c] == '?' && str[c - 1] == '$')
 		{
 			c++;
-			break;
+			break ;
 		}
 		c++;
 	}
-	while (str[c] != 0)
-	{
-		c++;
+	while (str[c++] != 0)
 		size++;
-	}
 	if (size == -1)
 		size = 0;
 	new = ft_calloc(size + ft_strlen(add) + 2, sizeof(char));

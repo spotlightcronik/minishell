@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_linked_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:40:03 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/04 12:00:25 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/05 11:40:30 by auloth           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,10 @@ int	ft_getenv_parse(t_info *data, int co, int insert)
 	t_list	*temp;
 	char	*arr;
 	int		count;
-	char	t;
 
 	count = co;
-	t = data->str[count];
-	if (t == ' ' || t == 0 || t == 39 || t == 34)
+	if (data->str[co] == ' ' || data->str[co] == 0 || data->str[co] == 39
+		|| data->str[co] == 34)
 		return (0);
 	if (data->str[count] == '?')
 		return (insert_global(&data->str, ft_itoa(g_global), co - 1));

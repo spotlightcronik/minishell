@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:41:40 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/03 19:14:18 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:12:02 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	execute_builtin(t_execution *exec, t_fd in, t_fd out)
 	t_command	*cmd;
 	t_fd		prev[2];
 
+	exec->pid = 0;
 	cmd = exec->current->content;
 	prev[0] = dup(STDIN_FILENO);
 	ft_dup2(in, STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:29:43 by auloth            #+#    #+#             */
-/*   Updated: 2025/03/04 15:58:13 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:13:29 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,22 @@
 
 int	g_global;
 
-int	init_data(t_info *data, int ac, char **av, char **ip)
+static void	print_banner(void)
+{
+	printf("-------------------------------------------------\n");
+	printf("       *                                         \n");
+	printf("     (  `                         )       (   (  \n");
+	printf("    )\\))(   (         (       ( /(    (  )\\  )\\  \n");
+	printf("   ((_)()\\  )\\   (    )\\  (   )\\())  ))\\((_)((_) \n");
+	printf("   (_()((_)((_)  )\\ )((_) )\\ ((_)\\  /((_)_   _   \n");
+	printf("   |  \\/  | (_) _(_/( (_)((_)| |(_)(_)) | | | |  \n");
+	printf("   | |\\/| | | || ' \\))| |(_-<| ' \\ / -_)| | | |  \n");
+	printf("   |_|  |_| |_||_||_| |_|/__/|_||_|\\___||_| |_|  \n");
+	printf("        -[ jeperez- ]-        -[ auloth ]-        \n");
+	printf("-------------------------------------------------\n");
+}
+
+static int	init_data(t_info *data, int ac, char **av, char **ip)
 {
 	using_history();
 	init_signals();
@@ -29,6 +44,7 @@ int	init_data(t_info *data, int ac, char **av, char **ip)
 	data->action_list = NULL;
 	if (data->initialize == 0)
 	{
+		print_banner();
 		g_global = 0;
 		data->env_param = NULL;
 		if (dtll(&data->env_param, ip) != 0)
@@ -50,7 +66,6 @@ int	main(int ac, char **av, char **ip)
 		data.str = readline("prompt > ");
 		if (!data.str)
 			return (printf("Exit"), full_clenup(&data));
-		add_history(data.str);
 		if (tokenize(&data) != 0 || data.token_list_size == 0)
 			clenup(&data);
 		else

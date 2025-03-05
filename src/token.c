@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auloth <spotlightcronik@gmail.com>         +#+  +:+       +#+        */
+/*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:52:09 by auloth            #+#    #+#             */
-/*   Updated: 2025/02/26 12:09:41 by auloth           ###   ########.fr       */
+/*   Updated: 2025/03/05 13:13:36 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	token_word(t_info *data)
 
 int	tokenize(t_info *data)
 {
+	if (data->str && data->str[0])
+		add_history(data->str);
 	data->count = 0;
 	while (data->str[data->count] != 0)
 	{

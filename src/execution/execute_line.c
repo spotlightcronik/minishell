@@ -6,7 +6,7 @@
 /*   By: jeperez- <jeperez-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:35:27 by jeperez-          #+#    #+#             */
-/*   Updated: 2025/03/04 14:56:40 by jeperez-         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:11:57 by jeperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,13 @@ void	execute_line(t_list *lst, t_list **envp)
 	else
 		multiple_cmd(&exec);
 	if (exec.pid)
+	{
 		waitpid(exec.pid, &wstatus, 0);
+		if (WIFEXITED(wstatus))
+			g_global = WEXITSTATUS(wstatus);
+		else if (WIFSIGNALED(wstatus))
+			g_global = WTERMSIG(wstatus) + 128;
+	}
 	clean_heredoc(exec);
 	kill(0, SIGQUIT);
-	if (WIFEXITED(wstatus))
-		g_global = WEXITSTATUS(wstatus);
-	else if (WIFSIGNALED(wstatus))
-		g_global = WTERMSIG(wstatus) + 128;
 }
